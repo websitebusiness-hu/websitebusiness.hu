@@ -1,0 +1,23 @@
+{
+  "name": "websitebusiness-hu",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "5.2.8",
+    "@tailwindcss/vite": "4.3.1",
+    "astro": "7.0.3",
+    "tailwindcss": "4.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,81 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-black/8 bg-white/95 backdrop-blur-md" data-header>
+  <div class="container-shell flex h-20 items-center justify-between max-md:h-18">
+    <a href="#kezdolap" class="flex items-center gap-3" aria-label="WebsiteBusiness főoldal">
+      <img src="/images/logo.webp" width="200" height="200" alt="" class="size-10 object-contain" fetchpriority="high" />
+      <span class="text-[0.95rem] font-extrabold tracking-[-0.035em]">WebsiteBusiness</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Fő navigáció">
+      <a class="text-sm font-semibold text-muted transition-colors hover:text-ink" href="#szolgaltatasok">Szolgáltatások</a>
+      <a class="text-sm font-semibold text-muted transition-colors hover:text-ink" href="#folyamat">Folyamat</a>
+      <a class="text-sm font-semibold text-muted transition-colors hover:text-ink" href="#referencia">Referencia</a>
+      <a class="text-sm font-semibold text-muted transition-colors hover:text-ink" href="#rolunk">Rólunk</a>
+    </nav>
+
+    <a href="#kapcsolat" class="button-primary max-lg:!hidden !min-h-11 !px-5 lg:!inline-flex">
+      Beszéljünk
+      <ArrowIcon />
+    </a>
+
+    <button
+      type="button"
+      class="relative flex size-11 items-center justify-center border border-line bg-white lg:hidden"
+      aria-label="Menü megnyitása"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-button
+    >
+      <span class="absolute h-0.5 w-5 -translate-y-1.5 bg-ink transition-transform" data-menu-line="top"></span>
+      <span class="absolute h-0.5 w-5 translate-y-1.5 bg-ink transition-transform" data-menu-line="bottom"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" data-mobile-menu>
+    <nav class="container-shell flex min-h-[calc(100svh-4.5rem)] flex-col py-8" aria-label="Mobil navigáció">
+      <div class="flex flex-col">
+        <a class="border-b border-line py-5 text-2xl font-semibold tracking-tight" href="#szolgaltatasok">Szolgáltatások</a>
+        <a class="border-b border-line py-5 text-2xl font-semibold tracking-tight" href="#folyamat">Folyamat</a>
+        <a class="border-b border-line py-5 text-2xl font-semibold tracking-tight" href="#referencia">Referencia</a>
+        <a class="border-b border-line py-5 text-2xl font-semibold tracking-tight" href="#rolunk">Rólunk</a>
+      </div>
+      <a href="#kapcsolat" class="button-primary mt-auto w-full">
+        Beszéljük át a projektet
+        <ArrowIcon />
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const topLine = document.querySelector<HTMLElement>('[data-menu-line="top"]');
+  const bottomLine = document.querySelector<HTMLElement>('[data-menu-line="bottom"]');
+
+  const setMenu = (open: boolean) => {
+    if (!button || !menu || !topLine || !bottomLine) return;
+
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Menü bezárása' : 'Menü megnyitása');
+    menu.classList.toggle('hidden', !open);
+    topLine.classList.toggle('!translate-y-0', open);
+    topLine.classList.toggle('rotate-45', open);
+    bottomLine.classList.toggle('!translate-y-0', open);
+    bottomLine.classList.toggle('-rotate-45', open);
+    document.body.classList.toggle('menu-open', open);
+  };
+
+  button?.addEventListener('click', () => {
+    setMenu(button.getAttribute('aria-expanded') !== 'true');
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) setMenu(false);
+  });
+</script>
