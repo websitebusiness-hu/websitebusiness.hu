@@ -4,11 +4,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  lang?: 'hu' | 'en';
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = 'hu' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/images/og-image.png', Astro.site);
+const huUrl = new URL('/', Astro.site);
+const enUrl = new URL('/en/', Astro.site);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -22,13 +25,13 @@ const structuredData = {
   telephone: '+36 20 569 4772',
   areaServed: {
     '@type': 'Country',
-    name: 'Hungary',
+    name: lang === 'en' ? 'Hungary' : 'Magyarország',
   },
-  serviceType: [
-    'Egyedi weboldal készítés',
-    'Webalkalmazás fejlesztés',
-    'Egyedi szoftverfejlesztés',
-  ],
+  availableLanguage: ['Hungarian', 'English'],
+  serviceType:
+    lang === 'en'
+      ? ['Client-generating website development', 'Web application development', 'Custom software development']
+      : ['Ügyfélszerző weboldal készítés', 'Webalkalmazás fejlesztés', 'Egyedi szoftverfejlesztés'],
   sameAs: [
     'https://www.instagram.com/websitebusinesshu/',
     'https://www.facebook.com/profile.php?id=61566883799064',
@@ -37,7 +40,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="hu">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -50,7 +53,9 @@ const structuredData = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="hu-HU" href={canonical} />
+    <link rel="alternate" hreflang="hu-HU" href={huUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={huUrl} />
 
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -59,7 +64,7 @@ const structuredData = {
     <link rel="manifest" href="/site.webmanifest" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="hu_HU" />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'hu_HU'} />
     <meta property="og:site_name" content="WebsiteBusiness" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -67,7 +72,10 @@ const structuredData = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="WebsiteBusiness – egyedi weboldal és webalkalmazás fejlesztés" />
+    <meta
+      property="og:image:alt"
+      content={lang === 'en' ? 'WebsiteBusiness – websites and custom software' : 'WebsiteBusiness – egyedi weboldal és webalkalmazás fejlesztés'}
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
