@@ -134,6 +134,39 @@ button {
   transform: translateY(-2px);
 }
 
+.signal-dot {
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(15, 79, 214, 0.32);
+  animation: signal-pulse 2.4s ease-out infinite;
+}
+
+.signal-dot::after {
+  position: absolute;
+  inset: -0.45rem;
+  border: 1px solid rgba(15, 79, 214, 0.22);
+  border-radius: 9999px;
+  content: "";
+  opacity: 0;
+  transform: scale(0.55);
+  animation: signal-ring 2.4s ease-out infinite;
+}
+
+.living-strip {
+  animation: quiet-float 7s ease-in-out infinite;
+}
+
+.service-icon {
+  animation: quiet-float 6.5s ease-in-out infinite;
+}
+
+.service-icon i {
+  transition: transform 220ms ease;
+}
+
+article:hover .service-icon i {
+  transform: translateY(-2px) scale(1.04);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -157,6 +190,45 @@ button {
 
 .delay-3 {
   transition-delay: 240ms;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(15, 79, 214, 0.28);
+  }
+
+  58% {
+    box-shadow: 0 0 0 0.42rem rgba(15, 79, 214, 0);
+  }
+}
+
+@keyframes signal-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes quiet-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 @media (max-width: 767px) {
@@ -190,5 +262,12 @@ button {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .signal-dot,
+  .signal-dot::after,
+  .living-strip,
+  .service-icon {
+    animation: none !important;
   }
 }
