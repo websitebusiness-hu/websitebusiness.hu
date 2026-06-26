@@ -1,0 +1,180 @@
+---
+import ArrowIcon from '../components/ArrowIcon.astro';
+import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Adatkezelési tájékoztató | WebsiteBusiness';
+const description =
+  'A WebsiteBusiness adatkezelési tájékoztatója a weboldal használatához, kapcsolatfelvételhez és ajánlatkéréshez kapcsolódó adatkezelésekről.';
+
+const updatedAt = '2026. június 26.';
+
+const dataRows = [
+  ['Kapcsolatfelvétel e-mailben vagy telefonon', 'név, e-mail cím, telefonszám, üzenet tartalma', 'megkeresés megválaszolása, ajánlat előkészítése', 'az érintett hozzájárulása, illetve szerződéskötést megelőző lépések', 'a megkeresés lezárásától számított legfeljebb 12 hónap'],
+  ['Ajánlatadás és üzleti egyeztetés', 'kapcsolattartási adatok, projektinformációk, üzleti igények', 'ajánlat készítése, projekt-előkészítés, kapcsolattartás', 'szerződéskötést megelőző lépések, jogos érdek', 'az ajánlat érvényességéig, illetve az üzleti kapcsolat lezárásától számított legfeljebb 5 év'],
+  ['Szerződéses együttműködés', 'kapcsolattartói adatok, számlázáshoz és teljesítéshez szükséges adatok', 'szolgáltatás teljesítése, kapcsolattartás, jogi és számviteli kötelezettségek teljesítése', 'szerződés teljesítése, jogi kötelezettség', 'a jogszabályi megőrzési idő végéig'],
+  ['Weboldal működtetése és biztonsága', 'IP-cím, böngészőadatok, látogatás technikai naplóadatai', 'biztonságos működés, hibakeresés, visszaélések megelőzése', 'jogos érdek', 'általában legfeljebb 30 nap'],
+];
+---
+
+<BaseLayout {title} {description}>
+  <Header />
+
+  <main>
+    <section class="relative overflow-hidden bg-white pt-20">
+      <div class="absolute inset-x-0 top-20 h-px bg-line"></div>
+      <div class="container-shell py-16 md:py-20 lg:py-24">
+        <a href="/" class="button-secondary mb-10">
+          <span class="rotate-180"><ArrowIcon /></span>
+          Vissza a főoldalra
+        </a>
+        <p class="eyebrow">Adatvédelem</p>
+        <h1 class="mt-6 max-w-5xl text-[clamp(3rem,6.5vw,5.8rem)] font-semibold leading-[0.96] tracking-[-0.06em]">
+          Adatkezelési tájékoztató
+        </h1>
+        <p class="mt-8 max-w-3xl text-lg leading-8 text-muted md:text-xl md:leading-9">
+          Ez a tájékoztató összefoglalja, hogyan kezeljük a WebsiteBusiness weboldal használata, kapcsolatfelvétel, ajánlatkérés és üzleti egyeztetés során megadott személyes adatokat.
+        </p>
+        <p class="mt-6 text-sm font-bold text-muted">Utolsó frissítés: {updatedAt}</p>
+      </div>
+    </section>
+
+    <section class="section-space border-y border-line bg-surface">
+      <div class="container-shell grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+        <div>
+          <p class="eyebrow">Adatkezelő</p>
+          <h2 class="section-title mt-6">Ki kezeli az adatokat?</h2>
+        </div>
+        <div class="border-t border-line bg-white">
+          <div class="grid gap-5 border-b border-line p-7 sm:grid-cols-[12rem_1fr]">
+            <strong>Adatkezelő</strong>
+            <span>WebsiteBusiness, a websitebusiness.hu weboldal üzemeltetője</span>
+          </div>
+          <div class="grid gap-5 border-b border-line p-7 sm:grid-cols-[12rem_1fr]">
+            <strong>E-mail</strong>
+            <a class="font-bold text-brand" href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a>
+          </div>
+          <div class="grid gap-5 border-b border-line p-7 sm:grid-cols-[12rem_1fr]">
+            <strong>Telefon</strong>
+            <a class="font-bold text-brand" href="tel:+36205694772">+36 20 569 4772</a>
+          </div>
+          <p class="p-7 text-sm leading-7 text-muted">
+            A végleges publikálás előtt érdemes a pontos vállalkozási adatokat is feltüntetni, például a jogi nevet, székhelyet, nyilvántartási számot vagy adószámot, ha ezek a nyilvános működéshez szükségesek.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container-shell">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Adatkezelések</p>
+          <h2 class="section-title mt-6">Milyen adatokat, milyen célból kezelünk?</h2>
+          <p class="section-copy mt-6">
+            Csak olyan adatokat kérünk és kezelünk, amelyek a megkeresés megválaszolásához, az ajánlat előkészítéséhez, a szolgáltatás teljesítéséhez vagy a weboldal biztonságos működtetéséhez szükségesek.
+          </p>
+        </div>
+
+        <div class="mt-12 overflow-hidden border border-line">
+          <div class="hidden grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-line bg-surface text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:grid">
+            <div class="p-4">Helyzet</div>
+            <div class="p-4">Adatok</div>
+            <div class="p-4">Cél</div>
+            <div class="p-4">Jogalap</div>
+            <div class="p-4">Megőrzés</div>
+          </div>
+          {
+            dataRows.map(([situation, data, purpose, legalBasis, retention]) => (
+              <article class="grid gap-5 border-b border-line p-6 last:border-b-0 lg:grid-cols-[1fr_1fr_1fr_1fr_1fr] lg:gap-0 lg:p-0">
+                <div class="lg:p-4">
+                  <span class="block text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:hidden">Helyzet</span>
+                  <strong>{situation}</strong>
+                </div>
+                <div class="leading-7 text-muted lg:p-4">
+                  <span class="block text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:hidden">Adatok</span>
+                  {data}
+                </div>
+                <div class="leading-7 text-muted lg:p-4">
+                  <span class="block text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:hidden">Cél</span>
+                  {purpose}
+                </div>
+                <div class="leading-7 text-muted lg:p-4">
+                  <span class="block text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:hidden">Jogalap</span>
+                  {legalBasis}
+                </div>
+                <div class="leading-7 text-muted lg:p-4">
+                  <span class="block text-xs font-extrabold uppercase tracking-[0.12em] text-muted lg:hidden">Megőrzés</span>
+                  {retention}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space border-y border-line bg-surface">
+      <div class="container-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div>
+          <p class="eyebrow">Sütik és mérés</p>
+          <h2 class="section-title mt-6">Használunk sütiket?</h2>
+        </div>
+        <div class="space-y-6 leading-8 text-muted">
+          <p>
+            A weboldal alapvető működéséhez szükséges technikai sütik és naplóadatok kezelhetők. Ezek célja a weboldal biztonságos működése, a hibák feltárása és a szolgáltatás megbízhatóságának fenntartása.
+          </p>
+          <p>
+            Ha a weboldalon később analitikai, hirdetési vagy remarketing eszköz kerül beállításra, annak használatáról külön, egyértelmű tájékoztatást és szükség esetén hozzájáruláskezelést kell biztosítani.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div>
+          <p class="eyebrow">Jogok</p>
+          <h2 class="section-title mt-6">Milyen jogai vannak?</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          {['Tájékoztatást kérhet az adatkezelésről.', 'Hozzáférést kérhet a személyes adataihoz.', 'Kérheti a pontatlan adatok helyesbítését.', 'Kérheti az adatok törlését vagy kezelésének korlátozását.', 'Tiltakozhat jogos érdeken alapuló adatkezelés ellen.', 'Hozzájáruláson alapuló adatkezelésnél visszavonhatja a hozzájárulását.'].map((item) => (
+            <div class="border border-line bg-white p-6 font-semibold leading-7">{item}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space bg-[#111827] text-white">
+      <div class="container-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div>
+          <p class="eyebrow !text-[#76a2ff]">Jogorvoslat</p>
+          <h2 class="section-title mt-6">Hová fordulhat kérdés vagy panasz esetén?</h2>
+        </div>
+        <div class="space-y-6 leading-8 text-white/70">
+          <p>
+            Adatkezeléssel kapcsolatos kérdés esetén először az <a class="font-bold text-white underline decoration-white/35 underline-offset-4" href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a> címen érdemes kapcsolatba lépni velünk.
+          </p>
+          <p>
+            Panasz esetén fordulhat a Nemzeti Adatvédelmi és Információszabadság Hatósághoz: 1055 Budapest, Falk Miksa utca 9-11.; postacím: 1363 Budapest, Pf. 9.; web: <a class="font-bold text-white underline decoration-white/35 underline-offset-4" href="https://www.naih.hu" target="_blank" rel="noopener noreferrer">naih.hu</a>.
+          </p>
+          <p>
+            Az érintett bírósághoz is fordulhat, ha megítélése szerint személyes adatainak kezelése sérti a vonatkozó adatvédelmi szabályokat.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="container-shell flex flex-col justify-between gap-8 py-10 sm:flex-row">
+      <div>
+        <img src="/images/header-logo.webp" width="1223" height="147" alt="WebsiteBusiness" class="w-48" />
+        <p class="mt-4 max-w-md text-sm leading-7 text-muted">Ügyfélszerző weboldal készítés, webfejlesztés és SEO alapozás vállalkozásoknak.</p>
+      </div>
+      <div class="flex flex-col gap-3 text-sm font-bold text-muted">
+        <a href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a>
+        <a href="/">Főoldal</a>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>

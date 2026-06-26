@@ -21,4 +21,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://websitebusiness.hu/en/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://websitebusiness.hu/" />
   </url>
+  <url>
+    <loc>https://websitebusiness.hu/adatkezelesi-tajekoztato/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
