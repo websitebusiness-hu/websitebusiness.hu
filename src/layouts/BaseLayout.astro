@@ -128,6 +128,15 @@ const structuredData = {
     <meta name="twitter:image" content={ogImage.href} />
     <meta name="twitter:image:alt" content={lang === 'en' ? 'WebsiteBusiness websites and custom software' : 'WebsiteBusiness ügyfélszerző weboldal készítés vállalkozásoknak'} />
 
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-5CM42NV1QQ"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5CM42NV1QQ');
+    </script>
+
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="font-sans antialiased">
