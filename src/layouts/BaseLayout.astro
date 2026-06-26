@@ -5,36 +5,80 @@ interface Props {
   title: string;
   description: string;
   lang?: 'hu' | 'en';
+  noindex?: boolean;
 }
 
-const { title, description, lang = 'hu' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/images/og-image.png', Astro.site);
-const huUrl = new URL('/', Astro.site);
-const enUrl = new URL('/en/', Astro.site);
+const { title, description, lang = 'hu', noindex = false } = Astro.props;
+const siteUrl = Astro.site ?? new URL('https://websitebusiness.hu');
+const canonical = new URL(Astro.url.pathname, siteUrl);
+const ogImage = new URL('/images/og-image.png', siteUrl);
+const huUrl = new URL('/', siteUrl);
+const enUrl = new URL('/en/', siteUrl);
+const organizationName = 'WebsiteBusiness';
+
+const services =
+  lang === 'en'
+    ? [
+        'Client acquisition system development',
+        'Client-generating website development',
+        'Business web development',
+        'Custom web application development',
+        'Technical SEO',
+      ]
+    : [
+        'Ügyfélszerző rendszer építés',
+        'Ügyfélszerző weboldal készítés',
+        'Webfejlesztés vállalkozásoknak',
+        'Egyedi webalkalmazás fejlesztés',
+        'Keresőoptimalizálás és technikai SEO',
+      ];
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'WebsiteBusiness',
-  url: 'https://websitebusiness.hu',
-  logo: 'https://websitebusiness.hu/images/logo.webp',
-  image: ogImage.href,
-  description,
-  email: 'info@websitebusiness.hu',
-  telephone: '+36 20 569 4772',
-  areaServed: {
-    '@type': 'Country',
-    name: lang === 'en' ? 'Hungary' : 'Magyarország',
-  },
-  availableLanguage: ['Hungarian', 'English'],
-  serviceType:
-    lang === 'en'
-      ? ['Client-generating website development', 'Web application development', 'Custom software development']
-      : ['Ügyfélszerző weboldal készítés', 'Webalkalmazás fejlesztés', 'Egyedi szoftverfejlesztés'],
-  sameAs: [
-    'https://www.instagram.com/websitebusinesshu/',
-    'https://www.facebook.com/profile.php?id=61566883799064',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+      name: organizationName,
+      url: siteUrl.href,
+      logo: new URL('/images/logo.webp', siteUrl).href,
+      image: ogImage.href,
+      email: 'info@websitebusiness.hu',
+      telephone: '+36 20 569 4772',
+      sameAs: [
+        'https://www.instagram.com/websitebusinesshu/',
+        'https://www.facebook.com/profile.php?id=61566883799064',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      name: organizationName,
+      url: siteUrl.href,
+      inLanguage: ['hu-HU', 'en'],
+      publisher: {
+        '@id': `${siteUrl}#organization`,
+      },
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}#service`,
+      name: organizationName,
+      url: siteUrl.href,
+      image: ogImage.href,
+      description,
+      email: 'info@websitebusiness.hu',
+      telephone: '+36 20 569 4772',
+      areaServed: {
+        '@type': 'Country',
+        name: lang === 'en' ? 'Hungary' : 'Magyarország',
+      },
+      availableLanguage: ['Hungarian', 'English'],
+      serviceType: services,
+      provider: {
+        '@id': `${siteUrl}#organization`,
+      },
+    },
   ],
 };
 ---
@@ -43,19 +87,19 @@ const structuredData = {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
-    <meta name="author" content="WebsiteBusiness" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content={organizationName} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="hu-HU" href={huUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={huUrl} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="hu-HU" href={huUrl.href} />
+    <link rel="alternate" hreflang="en" href={enUrl.href} />
+    <link rel="alternate" hreflang="x-default" href={huUrl.href} />
 
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -65,22 +109,24 @@ const structuredData = {
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'hu_HU'} />
-    <meta property="og:site_name" content="WebsiteBusiness" />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'hu_HU' : 'en_US'} />
+    <meta property="og:site_name" content={organizationName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content={lang === 'en' ? 'WebsiteBusiness – websites and custom software' : 'WebsiteBusiness – egyedi weboldal és webalkalmazás fejlesztés'}
+      content={lang === 'en' ? 'WebsiteBusiness websites and custom software' : 'WebsiteBusiness ügyfélszerző weboldal és webalkalmazás fejlesztés'}
     />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImage.href} />
+    <meta name="twitter:image:alt" content={lang === 'en' ? 'WebsiteBusiness websites and custom software' : 'WebsiteBusiness ügyfélszerző weboldal készítés vállalkozásoknak'} />
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>

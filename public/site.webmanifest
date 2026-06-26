@@ -1,7 +1,7 @@
 {
   "name": "WebsiteBusiness",
   "short_name": "WebsiteBusiness",
-  "description": "Egyedi weboldalak és webalkalmazások vállalkozásoknak.",
+  "description": "Ügyfélszerző weboldal készítés, webfejlesztés, egyedi webalkalmazás és SEO alapozás vállalkozásoknak.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
