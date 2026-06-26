@@ -4,26 +4,46 @@ import Header from '../../components/Header.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const services = [
-  ['fa-bullseye', 'Client-generating websites', 'A clear, fast website designed to build trust, explain your offer and turn more visitors into enquiries.', ['Custom design', 'Clear positioning', 'Easy contact']],
-  ['fa-window-restore', 'Web applications', 'A custom online system built around how your business works when a standard website is not enough.', ['Admin dashboard', 'Client portal', 'Custom features']],
-  ['fa-arrow-trend-up', 'Continuous improvement', 'Modernisation, speed improvements and new features for websites and systems that need to grow.', ['Modernisation', 'Automation', 'Long-term support']],
+  ['fa-bullseye', 'Client-generating websites', 'We do not build generic brochure sites. We create clear, fast websites that explain your offer, build trust and guide visitors toward enquiry.', ['Offer-led copy', 'Conversion-focused structure', 'Fast mobile experience']],
+  ['fa-window-restore', 'Web development and business workflows', 'We build the functionality behind the website: contact paths, forms, admin tools, client portals and custom web applications.', ['Lead capture paths', 'Admin dashboard', 'Custom web app']],
+  ['fa-arrow-trend-up', 'SEO and continuous improvement', 'A client acquisition system needs visibility. We support organic reach with technical SEO, useful content and measurable improvements.', ['Technical SEO foundation', 'Search-led content', 'Measurable growth']],
 ];
 
 const process = [
-  ['fa-comments', 'Understand the goal', 'We clarify what the business needs and what the software should achieve.'],
-  ['fa-pen-ruler', 'Create the plan', 'We define the structure, key features and a transparent proposal.'],
-  ['fa-code', 'Build the product', 'You see the progress throughout development and always know what comes next.'],
-  ['fa-rocket', 'Launch and improve', 'We test, launch and remain available as the business grows.'],
+  ['fa-comments', 'Understand what creates clients', 'We start with your business: who you want to reach, what problem you solve and why someone should choose you instead of a competitor.'],
+  ['fa-pen-ruler', 'Plan the client acquisition system', 'We define the message, page structure, trust signals, enquiry paths and SEO keywords before the website is built.'],
+  ['fa-code', 'Build the website and functionality', 'We develop a fast, responsive and search-friendly website where copy, design, forms and custom functionality work toward one goal.'],
+  ['fa-rocket', 'Launch, measure and improve', 'After launch, the goal remains the same: better enquiries. We prepare the indexing signals and leave a foundation that can keep growing.'],
 ];
 
 const values = [
-  ['fa-message', 'Clear communication', 'No unnecessary technical language. You always know what is being built, why and when.'],
-  ['fa-chart-line', 'Business-first thinking', 'We create more than an attractive interface. Every feature has a practical business purpose.'],
-  ['fa-layer-group', 'Built to grow', 'A focused first project can become a larger system later without starting again from scratch.'],
+  ['fa-message', 'Clear business messaging', 'Visitors should understand what you offer, who it is for and why they should contact you within a few seconds. The whole website is built around that clarity.'],
+  ['fa-chart-line', 'Website as a sales asset', 'Design, web development and SEO are not separate pieces. They work together so the site does more than look good: it helps generate enquiries.'],
+  ['fa-layer-group', 'Built for growth', 'A focused client-generating website can later grow into a custom web application, automated workflow, admin tool or new service pages.'],
 ];
 
-const title = 'Client-generating websites and custom software | WebsiteBusiness';
-const description = 'Modern websites, web applications and custom software designed to help businesses earn trust, generate enquiries and grow.';
+const faqs = [
+  ['What do you mean by a client acquisition system?', 'It means the website is more than an online business card. The copy, design, technical SEO, contact paths and custom functionality work together to turn more visitors into enquiries.'],
+  ['Does website development include SEO?', 'Yes. We plan a search-friendly structure, headings, metadata, fast loading, mobile usability, indexable content, sitemap signals and natural keyword usage from the start.'],
+  ['Who is this type of website for?', 'It is for service businesses, local companies, clubs and experts who want more than online presence: they want more enquiries, quote requests and client conversations.'],
+];
+
+const title = 'Client-generating websites and web development | WebsiteBusiness';
+const description =
+  'We build client acquisition systems for businesses: SEO-friendly website development, custom web applications, web development and technical SEO foundations.';
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: answer,
+    },
+  })),
+};
 ---
 
 <BaseLayout {title} {description} lang="en">
@@ -35,21 +55,21 @@ const description = 'Modern websites, web applications and custom software desig
       <div class="container-shell relative flex min-h-[calc(100svh-5rem)] flex-col items-center justify-start py-16 text-center md:py-20 lg:justify-center lg:py-24">
         <div class="reveal inline-flex items-center gap-2.5 border border-[#cdd7eb] bg-[#f5f8ff] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-brand">
           <span class="size-1.5 rounded-full bg-brand"></span>
-          Web development + client acquisition · 2026
+          Website development for business growth
         </div>
         <h1 class="reveal delay-1 mt-8 max-w-5xl text-[clamp(3rem,6.5vw,5.9rem)] font-semibold leading-[0.94] tracking-[-0.072em]">
-          <span class="block">Your website should</span>
-          <span class="block">do more than exist.</span>
-          <span class="block text-brand">It should win clients.</span>
+          <span class="block">We build </span>
+          <span class="block">client acquisition </span>
+          <span class="block text-brand">systems.</span>
         </h1>
-        <p class="reveal delay-2 mt-8 max-w-2xl text-lg leading-8 text-muted md:text-xl md:leading-9">
-          We combine your offer, website and custom functionality into one focused system that turns more visitors into genuine enquiries.
+        <p class="reveal delay-2 mt-8 max-w-3xl text-lg leading-8 text-muted md:text-xl md:leading-9">
+          Website development with us is not just a polished interface. You get a search-friendly website, clear business messaging and digital workflows designed to build trust and generate more enquiries.
         </p>
         <div class="reveal delay-3 mt-10 flex w-full max-w-xl flex-col justify-center gap-3 sm:flex-row">
           <a href="#contact" class="button-primary min-h-14 flex-1 !px-6">Book a free consultation <ArrowIcon /></a>
-          <a href="#work" class="button-secondary min-h-14 flex-1 !px-6">View our work</a>
+          <a href="#services" class="button-secondary min-h-14 flex-1 !px-6">How it works</a>
         </div>
-        <p class="reveal delay-3 mt-5 text-sm font-semibold text-muted">20 minutes. Practical ideas. No obligation.</p>
+        <p class="reveal delay-3 mt-5 text-sm font-semibold text-muted">20 minutes. Practical ideas. Honest feedback on how your business could win more clients online.</p>
         <div class="reveal delay-3 mt-14 flex w-full max-w-3xl flex-col items-center justify-center gap-5 border-y border-line py-5 sm:flex-row sm:gap-8">
           <span class="text-[0.68rem] font-extrabold uppercase tracking-[0.17em] text-muted">Trusted by</span>
           <span class="hidden h-5 w-px bg-line sm:block"></span>
@@ -59,9 +79,9 @@ const description = 'Modern websites, web applications and custom software desig
           </a>
         </div>
         <div class="reveal delay-3 mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold text-muted">
-          <span class="flex items-center gap-2"><i class="fa-solid fa-bullseye text-brand"></i>Designed around business goals</span>
-          <span class="flex items-center gap-2"><i class="fa-solid fa-mobile-screen-button text-brand"></i>Convincing on every screen</span>
-          <span class="flex items-center gap-2"><i class="fa-solid fa-chart-simple text-brand"></i>Measurable and scalable</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-bullseye text-brand" aria-hidden="true"></i>Offer-led content</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-mobile-screen-button text-brand" aria-hidden="true"></i>Fast mobile website</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-chart-simple text-brand" aria-hidden="true"></i>SEO and measurable growth</span>
         </div>
       </div>
     </section>
@@ -69,16 +89,16 @@ const description = 'Modern websites, web applications and custom software desig
     <section id="services" class="section-space">
       <div class="container-shell">
         <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-          <div class="reveal"><p class="eyebrow">How we help</p><h2 class="section-title mt-6">Your website becomes a real business tool.</h2></div>
-          <p class="section-copy reveal delay-1 lg:mt-10">We understand what you sell, who you want to reach and why they should choose you. Then we build the website and system around that.</p>
+          <div class="reveal"><p class="eyebrow">What we build</p><h2 class="section-title mt-6">Not just a website. A client acquisition system.</h2></div>
+          <p class="section-copy reveal delay-1 lg:mt-10">A strong business website needs to be found in search, convince visitors and make contacting you easy. We connect those goals through website development, web application development and SEO-led content.</p>
         </div>
         <div class="mt-16 grid border-l border-t border-line md:grid-cols-3">
           {services.map(([icon, heading, text, features], index) => (
             <article class={`reveal delay-${index + 1} flex min-h-[27rem] flex-col border-b border-r border-line p-7 hover:bg-surface lg:p-9`}>
-              <div class="flex items-center justify-between"><span class="text-xs font-extrabold text-brand">0{index + 1}</span><span class="flex size-12 items-center justify-center bg-[#eaf0ff] text-lg text-brand"><i class={`fa-solid ${icon}`}></i></span></div>
+              <div class="flex items-center justify-between"><span class="text-xs font-extrabold text-brand">0{index + 1}</span><span class="flex size-12 items-center justify-center bg-[#eaf0ff] text-lg text-brand"><i class={`fa-solid ${icon}`} aria-hidden="true"></i></span></div>
               <h3 class="mt-12 text-2xl font-semibold tracking-[-0.035em]">{heading}</h3>
               <p class="mt-5 leading-7 text-muted">{text}</p>
-              <ul class="mt-auto space-y-3 pt-10">{(features as string[]).map(feature => <li class="flex items-center gap-3 border-t border-line pt-3 text-sm font-bold"><i class="fa-solid fa-check text-xs text-brand"></i>{feature}</li>)}</ul>
+              <ul class="mt-auto space-y-3 pt-10">{(features as string[]).map((feature) => <li class="flex items-center gap-3 border-t border-line pt-3 text-sm font-bold"><i class="fa-solid fa-check text-xs text-brand" aria-hidden="true"></i>{feature}</li>)}</ul>
             </article>
           ))}
         </div>
@@ -88,13 +108,13 @@ const description = 'Modern websites, web applications and custom software desig
     <section id="process" class="section-space bg-[#111827] text-white">
       <div class="container-shell">
         <div class="flex flex-col justify-between gap-7 md:flex-row md:items-end">
-          <div class="reveal"><p class="eyebrow !text-[#76a2ff]">Our process</p><h2 class="section-title mt-6">Clear from the first conversation to launch.</h2></div>
-          <p class="max-w-md leading-7 text-white/65">Short conversations, visible progress and a clear next step throughout the project.</p>
+          <div class="reveal"><p class="eyebrow !text-[#76a2ff]">How it becomes a system</p><h2 class="section-title mt-6">Strategy, copy and development work in one direction.</h2></div>
+          <p class="max-w-md leading-7 text-white/65">The goal is not just to have another website. The goal is a clearer, more credible and more effective online presence.</p>
         </div>
         <ol class="mt-16 grid border-l border-t border-white/15 md:grid-cols-2 xl:grid-cols-4">
           {process.map(([icon, heading, text], index) => (
             <li class="min-h-72 border-b border-r border-white/15 p-7 lg:p-8">
-              <div class="flex items-center justify-between"><span class="text-xs font-extrabold text-[#76a2ff]">0{index + 1}</span><span class="flex size-11 items-center justify-center border border-white/15 text-[#76a2ff]"><i class={`fa-solid ${icon}`}></i></span></div>
+              <div class="flex items-center justify-between"><span class="text-xs font-extrabold text-[#76a2ff]">0{index + 1}</span><span class="flex size-11 items-center justify-center border border-white/15 text-[#76a2ff]"><i class={`fa-solid ${icon}`} aria-hidden="true"></i></span></div>
               <h3 class="mt-12 text-xl font-semibold">{heading}</h3><p class="mt-4 text-sm leading-7 text-white/60">{text}</p>
             </li>
           ))}
@@ -105,38 +125,47 @@ const description = 'Modern websites, web applications and custom software desig
     <section id="work" class="section-space">
       <div class="container-shell">
         <div class="flex flex-col justify-between gap-7 sm:flex-row sm:items-end">
-          <div><p class="eyebrow">Featured work</p><h2 class="section-title mt-6">Főnix Box Club</h2></div>
+          <div><p class="eyebrow">Featured work</p><h2 class="section-title mt-6">Főnix Box Club client-generating website</h2></div>
           <a href="https://www.fonixboxclub.hu" target="_blank" rel="noopener noreferrer" class="button-secondary">Visit website <ArrowIcon external /></a>
         </div>
-        <div class="mt-12 overflow-hidden border border-line bg-[#090909] p-2 sm:p-3"><img src="/images/fonix-reference.webp" width="2547" height="943" alt="Főnix Box Club website" class="w-full" loading="lazy" /></div>
+        <div class="mt-12 overflow-hidden border border-line bg-[#090909] p-2 sm:p-3"><img src="/images/fonix-reference.webp" width="2547" height="943" alt="Főnix Box Club responsive client-generating website homepage" class="w-full" loading="lazy" /></div>
         <div class="mt-10 flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-          <div class="flex items-center gap-4"><img src="/images/fonix-logo.webp" width="500" height="500" alt="" class="size-14 object-contain" /><div><div class="font-extrabold">Főnix Box Club</div><div class="mt-1 text-sm text-muted">Sports club</div></div></div>
-          <div class="max-w-xl lg:text-right"><h3 class="text-2xl font-semibold">A fast, modern website with its own admin dashboard.</h3><p class="mt-3 text-muted">Simple for visitors and the club alike.</p></div>
+          <div class="flex items-center gap-4"><img src="/images/fonix-logo.webp" width="500" height="500" alt="Főnix Box Club logo" class="size-14 object-contain" /><div><div class="font-extrabold">Főnix Box Club</div><div class="mt-1 text-sm text-muted">Sports club</div></div></div>
+          <div class="max-w-xl lg:text-right"><h3 class="text-2xl font-semibold">A modern website that helps the club reach interested visitors.</h3><p class="mt-3 text-muted">Clear for visitors, easy for the club to manage and ready for further online growth.</p></div>
         </div>
       </div>
     </section>
 
     <section id="reviews" class="section-space border-y border-line bg-surface">
       <div class="container-shell">
-        <div class="text-center"><p class="eyebrow">Client feedback</p><h2 class="section-title mx-auto mt-6">What clients say about working with us.</h2></div>
+        <div class="text-center"><p class="eyebrow">Client feedback</p><h2 class="section-title mx-auto mt-6">Good online presence is measured in business results.</h2></div>
         <div class="mt-14 grid items-start border-l border-t border-line lg:grid-cols-2">
-          <blockquote class="border-b border-r border-line bg-white p-7 sm:p-9"><i class="fa-solid fa-quote-left text-2xl text-brand"></i><p class="mt-6 text-xl font-medium leading-9">“The web development and online presence played a major role in helping our club reach more people.”</p><footer class="flex items-center gap-4 pt-10"><img src="/images/fonix-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" /><div><b>Csaba</b><div class="text-sm text-muted">Főnix Box Club · translated</div></div></footer></blockquote>
-          <blockquote class="border-b border-r border-line bg-white p-7 sm:p-9"><i class="fa-solid fa-quote-left text-2xl text-brand"></i><p class="mt-6 text-xl font-medium leading-9">“Zoli quickly understood what marketing content and advertising my business needed. The new materials and campaigns brought in enquiries.”</p><footer class="flex items-center gap-4 pt-10"><img src="/images/cleancar-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" /><div><b>Ádám</b><div class="text-sm text-muted">Cleancar Szolnok · translated</div></div></footer></blockquote>
+          <blockquote class="border-b border-r border-line bg-white p-7 sm:p-9"><i class="fa-solid fa-quote-left text-2xl text-brand" aria-hidden="true"></i><p class="mt-6 text-xl font-medium leading-9">"The web development and online presence played a major role in helping our club reach more people."</p><footer class="flex items-center gap-4 pt-10"><img src="/images/fonix-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" /><div><b>Csaba</b><div class="text-sm text-muted">Főnix Box Club | translated</div></div></footer></blockquote>
+          <blockquote class="border-b border-r border-line bg-white p-7 sm:p-9"><i class="fa-solid fa-quote-left text-2xl text-brand" aria-hidden="true"></i><p class="mt-6 text-xl font-medium leading-9">"Zoli quickly understood what marketing content and advertising my business needed. The new materials and campaigns brought in enquiries."</p><footer class="flex items-center gap-4 pt-10"><img src="/images/cleancar-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" /><div><b>Ádám</b><div class="text-sm text-muted">Cleancar Szolnok | translated</div></div></footer></blockquote>
         </div>
       </div>
     </section>
 
     <section id="about" class="section-space">
       <div class="container-shell grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
-        <div><p class="eyebrow">Why WebsiteBusiness?</p><h2 class="section-title mt-6">A development team that understands business.</h2><p class="section-copy mt-7">From focused websites to more complex web applications, our goal is the same: useful, reliable software that supports growth.</p></div>
-        <div class="border-t border-line">{values.map(([icon, heading, text]) => <article class="grid gap-5 border-b border-line py-9 sm:grid-cols-[3.5rem_1fr]"><span class="flex size-12 items-center justify-center bg-[#eaf0ff] text-brand"><i class={`fa-solid ${icon}`}></i></span><div><h3 class="text-xl font-semibold">{heading}</h3><p class="mt-3 leading-7 text-muted">{text}</p></div></article>)}</div>
+        <div><p class="eyebrow">Why WebsiteBusiness?</p><h2 class="section-title mt-6">A web development team with business thinking.</h2><p class="section-copy mt-7">Most businesses do not simply need a website. They need better enquiries. That is why we treat the offer, copy, user journey, technical SEO and development as one system.</p></div>
+        <div class="border-t border-line">{values.map(([icon, heading, text]) => <article class="grid gap-5 border-b border-line py-9 sm:grid-cols-[3.5rem_1fr]"><span class="flex size-12 items-center justify-center bg-[#eaf0ff] text-brand"><i class={`fa-solid ${icon}`} aria-hidden="true"></i></span><div><h3 class="text-xl font-semibold">{heading}</h3><p class="mt-3 leading-7 text-muted">{text}</p></div></article>)}</div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-space border-y border-line bg-surface">
+      <div class="container-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div><p class="eyebrow">FAQ</p><h2 class="section-title mt-6">Website development, SEO and client acquisition in plain language.</h2></div>
+        <div class="border-t border-line">{faqs.map(([question, answer]) => <article class="border-b border-line py-7"><h3 class="text-xl font-semibold">{question}</h3><p class="mt-3 leading-7 text-muted">{answer}</p></article>)}</div>
       </div>
     </section>
 
     <section id="contact" class="section-space">
-      <div class="container-shell"><div class="bg-brand px-6 py-14 text-white sm:px-12 lg:px-20 lg:py-20"><div class="grid items-end gap-12 lg:grid-cols-[1fr_auto]"><div><p class="text-xs font-extrabold uppercase tracking-[0.18em] text-white/70">Let’s build it</p><h2 class="mt-6 max-w-3xl text-[clamp(2.5rem,5.5vw,5rem)] font-semibold leading-[1.02] tracking-[-0.055em]">Have an idea? Let’s turn it into software that supports your business.</h2></div><div class="flex min-w-64 flex-col gap-3"><a href="tel:+36205694772" class="flex min-h-14 items-center justify-between bg-white px-5 font-extrabold text-ink"><span class="flex items-center gap-3"><i class="fa-solid fa-phone text-brand"></i>+36 20 569 4772</span><ArrowIcon /></a><a href="mailto:info@websitebusiness.hu" class="flex min-h-14 items-center justify-between border border-white/35 px-5 font-extrabold"><span class="flex items-center gap-3"><i class="fa-solid fa-envelope"></i>Email us</span><ArrowIcon /></a></div></div></div></div>
+      <div class="container-shell"><div class="bg-brand px-6 py-14 text-white sm:px-12 lg:px-20 lg:py-20"><div class="grid items-end gap-12 lg:grid-cols-[1fr_auto]"><div><p class="text-xs font-extrabold uppercase tracking-[0.18em] text-white/70">Start the project</p><h2 class="mt-6 max-w-3xl text-[clamp(2.5rem,5.5vw,5rem)] font-semibold leading-[1.02] tracking-[-0.055em]">Let’s find the client acquisition system that fits your business.</h2></div><div class="flex min-w-64 flex-col gap-3"><a href="tel:+36205694772" class="flex min-h-14 items-center justify-between bg-white px-5 font-extrabold text-ink"><span class="flex items-center gap-3"><i class="fa-solid fa-phone text-brand" aria-hidden="true"></i>+36 20 569 4772</span><ArrowIcon /></a><a href="mailto:info@websitebusiness.hu" class="flex min-h-14 items-center justify-between border border-white/35 px-5 font-extrabold"><span class="flex items-center gap-3"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Email us</span><ArrowIcon /></a></div></div></div></div>
     </section>
   </main>
 
-  <footer class="border-t border-line"><div class="container-shell flex flex-col justify-between gap-8 py-10 sm:flex-row"><div><img src="/images/header-logo.webp" width="1223" height="147" alt="WebsiteBusiness" class="w-48" /><p class="mt-4 text-sm text-muted">Websites and web applications designed for business growth.</p></div><div class="flex flex-col gap-3 text-sm font-bold text-muted"><a href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a><a href="/">Magyar változat</a></div></div><div class="border-t border-line"><div class="container-shell py-5 text-xs font-semibold text-muted">© {new Date().getFullYear()} WebsiteBusiness. All rights reserved.</div></div></footer>
+  <footer class="border-t border-line"><div class="container-shell flex flex-col justify-between gap-8 py-10 sm:flex-row"><div><img src="/images/header-logo.webp" width="1223" height="147" alt="WebsiteBusiness" class="w-48" /><p class="mt-4 text-sm text-muted">Client-generating websites, web development, custom web applications and SEO foundations.</p></div><div class="flex flex-col gap-3 text-sm font-bold text-muted"><a href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a><a href="/">Magyar változat</a></div></div><div class="border-t border-line"><div class="container-shell py-5 text-xs font-semibold text-muted">&copy; {new Date().getFullYear()} WebsiteBusiness. All rights reserved.</div></div></footer>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
 </BaseLayout>

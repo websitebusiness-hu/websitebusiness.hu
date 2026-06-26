@@ -3,10 +3,10 @@ import ArrowIcon from '../components/ArrowIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Az oldal nem található | WebsiteBusiness';
-const description = 'A keresett oldal nem található.';
+const description = 'A keresett oldal nem található. Térjen vissza a WebsiteBusiness főoldalára.';
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} noindex>
   <main class="flex min-h-screen items-center bg-surface py-16">
     <div class="container-shell">
       <a href="/" class="inline-flex items-center gap-3">
@@ -15,7 +15,7 @@ const description = 'A keresett oldal nem található.';
       </a>
       <p class="eyebrow mt-20">404</p>
       <h1 class="mt-6 max-w-3xl text-[clamp(3rem,8vw,6rem)] font-semibold leading-none tracking-[-0.06em]">Ez az oldal nincs itt.</h1>
-      <p class="mt-7 max-w-xl text-lg leading-8 text-muted">Lehet, hogy a hivatkozás megváltozott. A főoldalon minden fontos információt megtalál.</p>
+      <p class="mt-7 max-w-xl text-lg leading-8 text-muted">Lehet, hogy a hivatkozás megváltozott. A főoldalon minden fontos információt megtalál az ügyfélszerző weboldal készítésről, webfejlesztésről és SEO alapozásról.</p>
       <a href="/" class="button-primary mt-10">
         Vissza a főoldalra
         <ArrowIcon />
