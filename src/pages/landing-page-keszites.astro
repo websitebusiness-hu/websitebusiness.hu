@@ -1,0 +1,60 @@
+---
+import Header from '../components/Header.astro';
+import ServicePage from '../components/ServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Landing page készítés kampányokhoz | WebsiteBusiness';
+const description = 'Konverzióra tervezett landing page készítés hirdetéshez, ajánlathoz vagy új szolgáltatás bevezetéséhez. Fókuszált üzenet, egyértelmű CTA, mérhető alap.';
+
+const content = {
+  breadcrumb: 'Landing page készítés',
+  eyebrow: 'Kampány és landing oldal készítés',
+  title: 'Landing page készítés egy jó döntésért.',
+  intro: 'Fókuszált céloldal ajánlathoz, kampányhoz vagy szolgáltatáshoz — világos üzenettel és következő lépéssel.',
+  primaryCta: 'Beszéljük át a landing oldalt',
+  primarySubject: 'Landing page készítés – első egyeztetés',
+  proof: 'Kampányüzenet, oldalszerkezet és technikai kivitelezés egy cél köré szervezve.',
+  summary: {
+    title: 'Kevesebb elterelés. Több releváns érdeklődő.',
+    text: 'Tisztázzuk, honnan érkezik a látogató, mit ígér az ajánlat és milyen lépést várunk tőle.',
+    points: ['Hirdetéshez vagy kampányhoz illesztett üzenet', 'Egy ajánlatra fókuszáló oldalstruktúra', 'Erős, érthető CTA-k', 'Mérhető, továbbfejleszthető technikai alap'],
+  },
+  outcomes: [
+    { title: 'Tisztább kampányüzenet', text: 'A hirdetés ígérete és az oldal tartalma ugyanabba az irányba viszi az érdeklődőt.' },
+    { title: 'Kevesebb elterelés', text: 'A látogató nem egy teljes navigációs rendszerben keresgél, hanem azt kapja, amiért érkezett.' },
+    { title: 'Jobban értelmezhető visszajelzés', text: 'A fókuszált oldalnál könnyebb látni, mi működik az ajánlatban és min érdemes változtatni.' },
+  ],
+  process: [
+    { title: 'Tisztázzuk a forrást és az ajánlatot', text: 'Hirdetés, közösségi kampány, e-mail vagy organikus keresés: nem mindegy, milyen előzménnyel érkezik a látogató.' },
+    { title: 'Felépítjük az üzenet ívét', text: 'Probléma, megoldás, bizonyíték, kifogások és CTA: minden elemnek konkrét szerepe van.' },
+    { title: 'Fejlesztjük és előkészítjük a méréshez', text: 'A landing oldal gyors, mobilbarát és úgy készül el, hogy a kampányból érkező visszajelzésekből lehessen tanulni.' },
+  ],
+  faq: [
+    { question: 'Mikor érdemes külön landing oldalt készíteni?', answer: 'Ha egy hirdetés, új szolgáltatás, esemény vagy jól körülhatárolt ajánlat kap fókuszt. Ilyenkor egy külön céloldal tisztább döntési helyzetet ad, mint a főoldalra küldeni mindenkit.' },
+    { question: 'A landing page lehet része a meglévő weboldalnak?', answer: 'Igen. A kampánycél és a márka alapján eldőlhet, hogy önálló oldalként vagy a meglévő weboldal jól elkülönülő részeként a jobb.' },
+    { question: 'Tudtok segíteni a kampány üzenetének megfogalmazásában?', answer: 'Igen. A landing page készítésnél az üzenet, a célcsoport és az ajánlat tisztázása ugyanannyira fontos, mint maga a felület.' },
+  ],
+  related: [
+    { href: '/weboldal-keszites/', title: 'Weboldal készítés', text: 'Amikor nem egy kampányt, hanem a teljes online bemutatkozást kell jól felépíteni.' },
+    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webfejlesztés', text: 'Ha a landing oldal mögött egyedi folyamat, admin vagy adatkapcsolat is kell.' },
+  ],
+  contact: { title: 'Van egy ajánlatod, amelynek fókuszált oldal kell?', text: 'Nézzük meg, hogyan lesz az üzenetből erős landing oldal.', cta: 'Kérek egy első egyeztetést' },
+};
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Landing page készítés',
+  description,
+  serviceType: ['Landing page készítés', 'Landing oldal készítés', 'Kampányoldal fejlesztés'],
+  url: 'https://websitebusiness.hu/landing-page-keszites/',
+  areaServed: { '@type': 'Country', name: 'Magyarország' },
+  provider: { '@id': 'https://websitebusiness.hu/#organization' },
+};
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <ServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import Header from '../components/Header.astro';
+import ServicePage from '../components/ServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Egyedi webfejlesztés és webalkalmazás fejlesztés | WebsiteBusiness';
+const description = 'Egyedi webfejlesztés, webalkalmazás és üzleti szoftver fejlesztés vállalkozásoknak. Kevesebb kézi kör, átláthatóbb belső folyamatok.';
+
+const content = {
+  breadcrumb: 'Egyedi webfejlesztés',
+  eyebrow: 'Webalkalmazás és egyedi szoftverfejlesztés',
+  title: 'Egyedi webfejlesztés a jobb működésért.',
+  intro: 'Ha a fontos adatok és folyamatok túl sok Excelben, e-mailben és telefonon rekednek, egy jó webalkalmazás egyszerűbbé teheti a napi munkát.',
+  primaryCta: 'Beszéljük át a folyamatot',
+  primarySubject: 'Egyedi webfejlesztés – első egyeztetés',
+  proof: 'A fejlesztést a valós munkafolyamatból indítjuk, nem egy előre gyártott funkciólistából.',
+  summary: {
+    title: 'Nem mindenre kell egyedi rendszer.',
+    text: 'Előbb feltérképezzük a felesleges köröket, majd csak azt fejlesztjük, ami valóban könnyebbé teszi a munkát.',
+    points: ['Belső folyamatok és igények feltérképezése', 'Prototípus a fejlesztés előtt', 'Egyedi admin, ügyfélportál vagy webalkalmazás', 'Bővíthető alap későbbi funkciókhoz és integrációkhoz'],
+  },
+  outcomes: [
+    { title: 'Átláthatóbb működés', text: 'A fontos feladatok, állapotok és adatok nem szétszórva, hanem a munkafolyamathoz igazítva jelennek meg.' },
+    { title: 'Kevesebb ismétlődő kézi munka', text: 'Az egyedi webfejlesztés ott ad értéket, ahol valóban rövidíti a köröket és csökkenti a hibalehetőséget.' },
+    { title: 'Egy rendszer, ami a céggel együtt fejlődhet', text: 'A jó első verzió nem próbál mindent tudni, de alkalmas rá, hogy új szerepkörökkel, funkciókkal és adatkapcsolatokkal bővüljön.' },
+  ],
+  process: [
+    { title: 'Megértjük a valós folyamatot', text: 'Átbeszéljük, mi történik ma, kik használják a rendszert, hol akad el a munka, és milyen adatból kell döntést hozni.' },
+    { title: 'Prototípust és egyértelmű fejlesztési irányt készítünk', text: 'A fontos képernyők és működési szabályok a kódolás előtt láthatóvá válnak, így a fejlesztés célzottabb marad.' },
+    { title: 'Felépítjük, teszteljük, átadjuk', text: 'Az egyedi webalkalmazás a valós használati helyzetekre készül, és a következő fejlesztési körök számára is tiszta alapot ad.' },
+  ],
+  faq: [
+    { question: 'Mikor érdemes egyedi webalkalmazást fejleszteni?', answer: 'Akkor, amikor egy ismétlődő folyamat túl sok kézi munkát, hibát vagy átláthatatlanságot okoz, és egy kész eszköz nem illeszkedik jól a valós működéshez.' },
+    { question: 'Készítetek ügyfélportált vagy belső admin felületet?', answer: 'Igen. Az egyedi webfejlesztés része lehet ügyfélportál, admin felület, feladat- vagy időpontkezelés, jogosultságok és más üzleti funkciók is.' },
+    { question: 'Minden funkciót rögtön az első verzióban kell elkészíteni?', answer: 'Nem. Általában jobb egy erős, használható első verzióból indulni, majd a valós visszajelzések alapján építeni tovább.' },
+  ],
+  related: [
+    { href: '/weboldal-keszites/', title: 'Weboldal készítés', text: 'Amikor a következő lépés a világosabb online bemutatkozás és több jó érdeklődő.' },
+    { href: '/landing-page-keszites/', title: 'Landing page készítés', text: 'Amikor egy ajánlatnak vagy kampánynak kell fókuszált, konverzióra tervezett céloldal.' },
+  ],
+  contact: { title: 'Van egy akadozó folyamat, amelyhez kevés a kézi megoldás?', text: 'Egy rövid egyeztetésen megnézzük, hogy az egyedi webfejlesztés-e a jó következő lépés.', cta: 'Kérek egy első egyeztetést' },
+};
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Egyedi webfejlesztés és webalkalmazás fejlesztés',
+  description,
+  serviceType: ['Egyedi webfejlesztés', 'Webalkalmazás fejlesztés', 'Egyedi szoftverfejlesztés'],
+  url: 'https://websitebusiness.hu/egyedi-webfejlesztes/',
+  areaServed: { '@type': 'Country', name: 'Magyarország' },
+  provider: { '@id': 'https://websitebusiness.hu/#organization' },
+};
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <ServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
+</BaseLayout>
