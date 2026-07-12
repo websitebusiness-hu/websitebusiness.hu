@@ -442,13 +442,13 @@ button {
 
 .editorial-heading {
   display: grid;
-  align-items: end;
+  align-items: center;
   gap: 2rem;
   grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.72fr);
 }
 
 .editorial-heading .section-copy {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0;
 }
 
 .editorial-heading--compact {
