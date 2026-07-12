@@ -1,0 +1,428 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+
+type Locale = 'hu' | 'en';
+
+interface HeroLine {
+  text: string;
+  accent?: boolean;
+}
+
+interface Solution {
+  number: string;
+  outcome: string;
+  service: string;
+  title: string;
+  text: string;
+  bullets: string[];
+  kind: string;
+  url?: string;
+  linkLabel?: string;
+}
+
+interface ProcessStep {
+  number: string;
+  title: string;
+  text: string;
+  outcome: string;
+}
+
+interface LandingContent {
+  hero: {
+    eyebrow: string;
+    lines: HeroLine[];
+    lead: string;
+    primaryCta: string;
+    secondaryCta: string;
+    note: string;
+    flowLabels: string[];
+    ticker: string[];
+  };
+  diagnostic: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    items: Array<{ number: string; question: string; answer: string }>;
+  };
+  solutions: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    items: Solution[];
+  };
+  work: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    liveLabel: string;
+    imageAlt: string;
+    client: string;
+    clientType: string;
+    labels: string[];
+    details: string[];
+    quote: string;
+    author: string;
+  };
+  process: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    steps: ProcessStep[];
+  };
+  approach: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    note: string;
+    principles: Array<{ title: string; text: string }>;
+  };
+  testimonial: {
+    eyebrow: string;
+    title: string;
+    quote: string;
+    author: string;
+    company: string;
+  };
+  faq: {
+    eyebrow: string;
+    title: string;
+    items: Array<{ question: string; answer: string }>;
+  };
+  contact: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    emailCta: string;
+    phoneCta: string;
+    emailSubject: string;
+  };
+  footer: {
+    text: string;
+    legal: string;
+    locale: string;
+    country: string;
+  };
+}
+
+interface Props {
+  lang?: Locale;
+  content: LandingContent;
+}
+
+const { lang = 'hu', content } = Astro.props;
+const isEnglish = lang === 'en';
+const ids = isEnglish
+  ? { home: 'home', solutions: 'solutions', work: 'work', process: 'process', about: 'about', contact: 'contact' }
+  : { home: 'kezdolap', solutions: 'megoldasok', work: 'munka', process: 'folyamat', about: 'rolunk', contact: 'kapcsolat' };
+const tickerItems = [...content.hero.ticker, ...content.hero.ticker, ...content.hero.ticker];
+const emailHref = `mailto:info@websitebusiness.hu?subject=${encodeURIComponent(content.contact.emailSubject)}`;
+const systemLabels = isEnglish ? ['brief', 'workflow', 'operations'] : ['brief', 'folyamat', 'működés'];
+---
+
+<main>
+  <section id={ids.home} class="hero-section">
+    <div class="hero-halo hero-halo--one" aria-hidden="true"></div>
+    <div class="hero-halo hero-halo--two" aria-hidden="true"></div>
+    <div class="container-shell hero-layout">
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow">{content.hero.eyebrow}</p>
+        <h1 class="hero-title">
+          {
+            content.hero.lines.map((line, index) => (
+              <span class={`hero-line ${line.accent ? 'hero-line--accent' : ''}`} style={`--line-delay: ${index * 90}ms`}>
+                {line.text}
+              </span>
+            ))
+          }
+        </h1>
+        <p class="hero-lead">{content.hero.lead}</p>
+        <div class="hero-actions">
+          <a href={`#${ids.contact}`} class="button-primary hero-primary">
+            {content.hero.primaryCta}
+            <ArrowIcon />
+          </a>
+          <a href={`#${ids.solutions}`} class="text-link hero-secondary">{content.hero.secondaryCta} <ArrowIcon /></a>
+        </div>
+        <p class="hero-note"><span aria-hidden="true">✦</span>{content.hero.note}</p>
+      </div>
+
+      <div class="hero-flow" aria-hidden="true">
+        <span class="flow-grid flow-grid--one"></span>
+        <span class="flow-grid flow-grid--two"></span>
+        <svg class="flow-svg" viewBox="0 0 620 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="flow-path flow-path--one" d="M38 348C125 347 103 119 240 141C365 162 332 361 574 225" />
+          <path class="flow-path flow-path--two" d="M34 400C154 395 188 258 293 286C414 318 393 157 589 103" />
+          <path class="flow-path flow-path--three" d="M43 157C143 174 160 397 308 387C443 378 458 267 583 292" />
+          <path class="flow-guide" d="M48 261H573" />
+          <circle class="flow-node flow-node--one" cx="240" cy="141" r="8" />
+          <circle class="flow-node flow-node--two" cx="293" cy="286" r="7" />
+          <circle class="flow-node flow-node--three" cx="458" cy="267" r="7" />
+          <circle class="flow-target" cx="574" cy="225" r="18" />
+          <path class="flow-target-mark" d="M566 225h16M574 217v16" />
+        </svg>
+        <span class="flow-label flow-label--one">{content.hero.flowLabels[0]}</span>
+        <span class="flow-label flow-label--two">{content.hero.flowLabels[1]}</span>
+        <span class="flow-label flow-label--three">{content.hero.flowLabels[2]}</span>
+      </div>
+    </div>
+
+    <div class="hero-ticker" aria-hidden="true">
+      <div class="hero-ticker-track">
+        {
+          tickerItems.map((item) => (
+            <span>{item}<b>✦</b></span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space diagnostic-section">
+    <div class="container-shell">
+      <div class="editorial-heading">
+        <div>
+          <p class="eyebrow">{content.diagnostic.eyebrow}</p>
+          <h2 class="section-title">{content.diagnostic.title}</h2>
+        </div>
+        <p class="section-copy">{content.diagnostic.intro}</p>
+      </div>
+
+      <ol class="diagnostic-list">
+        {
+          content.diagnostic.items.map((item) => (
+            <li class="diagnostic-item">
+              <div>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </div>
+              <span class="diagnostic-arrow" aria-hidden="true"><ArrowIcon /></span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id={ids.solutions} class="solutions-section">
+    <div class="container-shell">
+      <div class="editorial-heading editorial-heading--compact">
+        <div>
+          <p class="eyebrow">{content.solutions.eyebrow}</p>
+          <h2 class="section-title">{content.solutions.title}</h2>
+        </div>
+        <p class="section-copy">{content.solutions.intro}</p>
+      </div>
+
+      <div class="solution-scenes">
+        {
+          content.solutions.items.map((solution) => (
+            <article class={`solution-scene solution-scene--${solution.kind}`}>
+              <div class="solution-copy">
+                <p class="solution-outcome">{solution.outcome}</p>
+                <p class="solution-service">{solution.service}</p>
+                <h3>{solution.title}</h3>
+                <p>{solution.text}</p>
+                {
+                  solution.url && solution.linkLabel && (
+                    <a href={solution.url} class="solution-link">{solution.linkLabel}<ArrowIcon /></a>
+                  )
+                }
+                <ul>
+                  {solution.bullets.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+
+              {
+                solution.kind === 'web' ? (
+                  <div class="solution-art solution-art--browser" aria-hidden="true">
+                    <div class="browser-plane browser-plane--back"><span></span><i></i><i></i></div>
+                    <div class="browser-plane browser-plane--middle"><span></span><i></i><b></b><i></i></div>
+                    <div class="browser-plane browser-plane--front"><span></span><em></em><i></i><i></i><i></i></div>
+                  </div>
+                ) : (
+                  <div class="solution-art solution-art--system" aria-hidden="true">
+                    <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="system-path system-path--one" d="M58 180H165C202 180 207 95 266 95H445" />
+                      <path class="system-path system-path--two" d="M58 180H210C255 180 247 274 316 274H445" />
+                      <path class="system-path system-path--three" d="M266 95V274" />
+                      <circle cx="58" cy="180" r="17" class="system-node system-node--origin" />
+                      <circle cx="266" cy="95" r="15" class="system-node" />
+                      <circle cx="266" cy="274" r="15" class="system-node" />
+                      <circle cx="445" cy="95" r="17" class="system-node system-node--target" />
+                      <circle cx="445" cy="274" r="17" class="system-node system-node--target" />
+                    </svg>
+                    <span class="system-label system-label--one">{systemLabels[0]}</span>
+                    <span class="system-label system-label--two">{systemLabels[1]}</span>
+                    <span class="system-label system-label--three">{systemLabels[2]}</span>
+                  </div>
+                )
+              }
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id={ids.work} class="section-space work-section">
+    <div class="container-shell">
+      <div class="editorial-heading">
+        <div>
+          <p class="eyebrow">{content.work.eyebrow}</p>
+          <h2 class="section-title">{content.work.title}</h2>
+        </div>
+        <div>
+          <p class="section-copy">{content.work.intro}</p>
+          <a href="https://www.fonixboxclub.hu" target="_blank" rel="noopener noreferrer" class="text-link mt-7">{content.work.liveLabel} <ArrowIcon external /></a>
+        </div>
+      </div>
+
+      <figure class="case-stage">
+        <div class="case-orbit case-orbit--one" aria-hidden="true"></div>
+        <div class="case-orbit case-orbit--two" aria-hidden="true"></div>
+        <div class="case-scan" aria-hidden="true"></div>
+        <img src="/images/fonix-reference.webp" width="2547" height="943" alt={content.work.imageAlt} loading="lazy" />
+        <figcaption>{content.work.client} <span>↗</span></figcaption>
+      </figure>
+
+      <div class="case-details">
+        <div class="case-client">
+          <img src="/images/fonix-logo.webp" width="500" height="500" alt={`${content.work.client} logo`} loading="lazy" />
+          <div><strong>{content.work.client}</strong><span>{content.work.clientType}</span></div>
+        </div>
+        <dl>
+          {
+            content.work.labels.map((label, index) => (
+              <div>
+                <dt>{label}</dt>
+                <dd>{content.work.details[index]}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <blockquote class="case-quote">
+        <span aria-hidden="true">“</span>
+        <p>{content.work.quote}</p>
+        <footer>{content.work.author}</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id={ids.process} class="section-space process-section">
+    <div class="container-shell process-layout">
+      <div class="process-intro">
+        <p class="eyebrow">{content.process.eyebrow}</p>
+        <h2 class="section-title">{content.process.title}</h2>
+        <p class="section-copy">{content.process.intro}</p>
+      </div>
+      <ol class="process-list">
+        {
+          content.process.steps.map((step) => (
+            <li class="process-item">
+              <span class="process-number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+              <span class="process-outcome">{step.outcome}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id={ids.about} class="section-space approach-section">
+    <div class="container-shell">
+      <div class="approach-grid">
+        <div>
+          <p class="eyebrow">{content.approach.eyebrow}</p>
+          <h2 class="section-title">{content.approach.title}</h2>
+          <p class="section-copy">{content.approach.intro}</p>
+          <p class="approach-note">{content.approach.note}</p>
+        </div>
+        <ol class="approach-list">
+          {
+            content.approach.principles.map((principle) => (
+              <li>
+                <div><h3>{principle.title}</h3><p>{principle.text}</p></div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial-section">
+    <div class="container-shell testimonial-layout">
+      <div>
+        <p class="eyebrow">{content.testimonial.eyebrow}</p>
+        <h2 class="section-title">{content.testimonial.title}</h2>
+      </div>
+      <blockquote>
+        <p>{content.testimonial.quote}</p>
+        <footer>
+          <img src="/images/cleancar-logo.webp" width="500" height="500" alt={`${content.testimonial.company} logo`} loading="lazy" />
+          <span><strong>{content.testimonial.author}</strong>{content.testimonial.company}</span>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section-space faq-section">
+    <div class="container-shell faq-layout">
+      <div>
+        <p class="eyebrow">{content.faq.eyebrow}</p>
+        <h2 class="section-title">{content.faq.title}</h2>
+      </div>
+      <div class="faq-list">
+        {
+          content.faq.items.map((item) => (
+            <details class="faq-item">
+              <summary><span>{item.question}</span><i aria-hidden="true">+</i></summary>
+              <div class="faq-answer"><p>{item.answer}</p></div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id={ids.contact} class="contact-section">
+    <div class="contact-stripe contact-stripe--one" aria-hidden="true"></div>
+    <div class="contact-stripe contact-stripe--two" aria-hidden="true"></div>
+    <div class="container-shell contact-layout">
+      <div>
+        <p class="eyebrow contact-eyebrow">{content.contact.eyebrow}</p>
+        <h2>{content.contact.title}</h2>
+        <p>{content.contact.text}</p>
+      </div>
+      <div class="contact-actions">
+        <a href={emailHref} class="contact-email">{content.contact.emailCta} <ArrowIcon /></a>
+        <a href="tel:+36205694772" class="contact-phone"><span>+36 20 569 4772</span><span>{content.contact.phoneCta}</span></a>
+        <a href="mailto:info@websitebusiness.hu" class="contact-address">info@websitebusiness.hu</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container-shell site-footer-main">
+    <div>
+      <a href={`#${ids.home}`} aria-label={isEnglish ? 'WebsiteBusiness home' : 'WebsiteBusiness főoldal'}>
+        <img src="/images/header-logo.webp" width="1223" height="147" alt="WebsiteBusiness" loading="lazy" />
+      </a>
+      <p>{content.footer.text}</p>
+    </div>
+    <div class="site-footer-links">
+      <a href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a>
+      <a href="https://www.instagram.com/websitebusinesshu/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61566883799064" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="/adatkezelesi-tajekoztato/">{content.footer.legal}</a>
+    </div>
+  </div>
+  <div class="site-footer-meta"><div class="container-shell"><span>&copy; {new Date().getFullYear()} WebsiteBusiness. {content.footer.locale}</span><span>{content.footer.country}</span></div></div>
+</footer>

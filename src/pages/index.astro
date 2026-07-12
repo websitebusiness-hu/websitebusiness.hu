@@ -1,423 +1,160 @@
 ---
-import ArrowIcon from '../components/ArrowIcon.astro';
 import Header from '../components/Header.astro';
+import LandingPage from '../components/LandingPage.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const services = [
-  {
-    number: '01',
-    icon: 'fa-bullseye',
-    title: 'Ügyfélszerző weboldal készítés',
-    text: 'Nem sablonos bemutatkozó oldalt készítünk, hanem olyan weboldalt, amely gyorsan elmagyarázza az ajánlatát, bizalmat épít és kapcsolatfelvételre vezeti a látogatót.',
-    features: ['Ajánlatra épített szöveg', 'Konverzióra tervezett felépítés', 'Mobilbarát, gyors működés'],
+const content = {
+  hero: {
+    eyebrow: 'Weboldal készítés · landing page · egyedi rendszer',
+    lines: [
+      { text: 'Weboldal készítés.' },
+      { text: 'Üzleti céllal.', accent: true },
+    ],
+    lead: 'Céges weboldalak, landing page-ek és egyedi rendszerek — több jó megkereséshez.',
+    primaryCta: 'Beszéljük át a projektet',
+    secondaryCta: 'Megnézem a megoldásokat',
+    note: 'Kötetlen első egyeztetés · válasz 1 munkanapon belül',
+    flowLabels: ['érthető ajánlat', 'bizalom', 'következő lépés'],
+    ticker: ['Weboldal', 'Landing page', 'Egyedi rendszer', 'Érthető ajánlat', 'Tiszta működés'],
   },
-  {
-    number: '02',
-    icon: 'fa-window-restore',
-    title: 'Webfejlesztés és automatizált folyamatok',
-    text: 'A weboldal mögé olyan funkciókat építünk, amelyek megkönnyítik az érdeklődők kezelését: űrlapok, admin felület, ügyfélportál vagy egyedi webalkalmazás.',
-    features: ['Kapcsolatfelvételi útvonalak', 'Admin felület', 'Egyedi webalkalmazás'],
+  diagnostic: {
+    eyebrow: 'Először a helyzetet nézzük meg',
+    title: 'A weboldalad segít dönteni — vagy útban van.',
+    intro: 'Megkeressük, hol vész el az érdeklődő figyelme vagy a csapat ideje.',
+    items: [
+      {
+        number: '01',
+        question: 'Van weboldalad, mégsem hoz elég megkeresést?',
+        answer: 'Ha az ajánlat nem egyértelmű, nincs bizalom vagy nehéz továbblépni, a látogató továbbáll.',
+      },
+      {
+        number: '02',
+        question: 'Kampányhoz kell fókuszált landing page?',
+        answer: 'Egy jó landing page egy döntéshez vezeti az érdeklődőt, nem próbál mindent elmondani.',
+      },
+      {
+        number: '03',
+        question: 'Túl sok a kézi kör Excelben és e-mailben?',
+        answer: 'Egy jól átgondolt belső rendszer rövidíti a lassító, ismétlődő munkát.',
+      },
+    ],
   },
-  {
-    number: '03',
-    icon: 'fa-arrow-trend-up',
-    title: 'SEO és folyamatos fejlesztés',
-    text: 'A rendszer akkor működik jól, ha megtalálható. Rendezett technikai SEO-val, átgondolt tartalommal és mérhető fejlesztésekkel támogatjuk az organikus elérést.',
-    features: ['Technikai SEO alapok', 'Kulcsszó-alapú tartalom', 'Mérhető eredmények'],
+  solutions: {
+    eyebrow: 'Amit felépítünk',
+    title: 'Két út. Egy cél: könnyebb növekedés.',
+    intro: 'Akár a láthatóságot, akár a működést tesszük rendbe, üzleti helyzetből indulunk.',
+    items: [
+      {
+        kind: 'web',
+        number: '01',
+        outcome: 'Több jó megkeresés',
+        service: 'Weboldal és landing page',
+        title: 'Felület, ami irányt ad.',
+        text: 'Megtervezzük, mit értsen meg a látogató, majd felépítjük hozzá az oldalt és a következő lépést.',
+        bullets: ['Ajánlat és üzenet', 'Struktúra', 'Gyors, mobilra tervezett oldal'],
+        url: '/weboldal-keszites/',
+        linkLabel: 'Weboldal készítés részletei',
+      },
+      {
+        kind: 'system',
+        number: '02',
+        outcome: 'Kevesebb kézi kör',
+        service: 'Egyedi webfejlesztés',
+        title: 'Kevesebb kézi kör. Jobb működés.',
+        text: 'Ügyfélportál, admin vagy adatkapcsolat: a napi folyamatból indulunk, nem kész dobozból.',
+        bullets: ['Folyamattérkép', 'Prototípus', 'Egyedi webalkalmazás'],
+        url: '/egyedi-webfejlesztes/',
+        linkLabel: 'Egyedi webfejlesztés részletei',
+      },
+    ],
   },
-];
+  work: {
+    eyebrow: 'Valódi munka',
+    title: 'Főnix Box Club — karakteres online jelenlét.',
+    intro: 'A weboldal átadja a klub hangulatát, és gyors utat ad az információkhoz és a kapcsolathoz.',
+    liveLabel: 'Megnézem az élő weboldalt',
+    imageAlt: 'A Főnix Box Club számára készült weboldal kezdőlapja',
+    client: 'Főnix Box Club',
+    clientType: 'Sportegyesület · weboldal + admin',
+    labels: ['Kiinduló helyzet', 'A feladat', 'Megoldás'],
+    details: [
+      'A klub karakterét online is következetesen kellett megmutatni.',
+      'Gyors út a fontos információkhoz és a kapcsolathoz.',
+      'Karakteres, mobilbarát oldal és könnyen kezelhető admin.',
+    ],
+    quote: 'A webes fejlesztések és az online megjelenések nagyban hozzájárultak ahhoz, hogy klubunk egyre több emberhez eljusson.',
+    author: 'Csaba · Főnix Box Club',
+  },
+  process: {
+    eyebrow: 'Így lesz az ötletből működő eszköz',
+    title: 'Egy projektnek nem kell ködösnek lennie.',
+    intro: 'Minden lépésnél látod, min dolgozunk és mi lesz belőle.',
+    steps: [
+      { number: '01', title: 'Megértjük a helyzetet', text: 'A célt, a célközönséget és az elakadást értjük meg először.', outcome: 'Közös irány' },
+      { number: '02', title: 'Megrajzoljuk a megoldást', text: 'Az oldal- vagy rendszertervet a fejlesztés előtt tisztázzuk.', outcome: 'Tiszta terv' },
+      { number: '03', title: 'Megépítjük és teszteljük', text: 'Valódi használatra fejlesztünk, majd mobilon és asztali gépen is tesztelünk.', outcome: 'Használható eszköz' },
+      { number: '04', title: 'Élesítünk és átadunk', text: 'Olyan alapot adunk át, amely később is bővíthető.', outcome: 'Bővíthető alap' },
+    ],
+  },
+  approach: {
+    eyebrow: 'A szemléletünk',
+    title: 'Nem sablont adunk. Jó irányt.',
+    intro: 'A cél: érthetőbb ajánlat, jobb ügyfélút vagy kevesebb kézi munka.',
+    note: 'Azokkal beszélsz, akik a megoldáson dolgoznak — gyors, követhető döntésekkel.',
+    principles: [
+      { title: 'A látogató gyorsan érti a lényeget.', text: 'Az első képernyő a vevő helyzetéről és a következő lépésről szól.' },
+      { title: 'A csapatnak is könnyű használni.', text: 'Az admin akkor jó, ha egyszerűbbé teszi a napi munkát.' },
+      { title: 'A rendszer együtt nő a céggel.', text: 'Először a fontos lépést építjük meg, később bővíthetően.' },
+    ],
+  },
+  testimonial: {
+    eyebrow: 'Visszajelzés',
+    title: 'Jó együttműködés, már az elejétől.',
+    quote: '„Zoli már a közös munkánk elején gyorsan ráérzett, milyen marketing tartalomra és hirdetésre van szükségem ahhoz, hogy az emberek felfigyeljenek a vállalkozásomra.”',
+    author: 'Ádám',
+    company: 'Cleancar Szolnok',
+  },
+  faq: {
+    eyebrow: 'Gyakori kérdések',
+    title: 'Röviden, mielőtt beszélünk.',
+    items: [
+      { question: 'Van értelme beszélni, ha már van weboldalunk?', answer: 'Igen. Az első egyeztetésen kiderül, hogy az ajánlat, a szerkezet, a sebesség vagy a kapcsolatfelvétel szorul-e javításra.' },
+      { question: 'Mikor kell egyedi rendszert fejleszteni?', answer: 'Ha egy ismétlődő folyamat túl sok kézi munkát vagy hibát okoz. Először tisztázzuk a folyamatot, utána javaslunk fejlesztést.' },
+      { question: 'Segítetek a szövegben is?', answer: 'Igen. Közösen tisztázzuk az ajánlatot, a célcsoportot és a fő üzeneteket.' },
+      { question: 'Mennyibe kerül egy projekt?', answer: 'A céloktól, oldalak és funkciók számától függ. Az első egyeztetés után tiszta első lépést és ajánlatot kapsz.' },
+    ],
+  },
+  contact: {
+    eyebrow: 'Első beszélgetés',
+    title: 'A weboldalad többet is hozhat.',
+    text: 'Nézzük meg a legjobb következő lépést — weboldal, landing page vagy egyedi fejlesztés.',
+    emailCta: 'Írok a projektről',
+    phoneCta: 'Inkább felhívom',
+    emailSubject: 'Első egyeztetés a WebsiteBusiness-szel',
+  },
+  footer: {
+    text: 'Weboldalak és egyedi rendszerek növekvő vállalkozásoknak.',
+    legal: 'Adatkezelési tájékoztató',
+    locale: 'Minden jog fenntartva.',
+    country: 'Magyarország · országos együttműködés',
+  },
+};
 
-const process = [
-  ['01', 'fa-comments', 'Megértjük, miből lesz ügyfél', 'Nem a dizájnnal kezdünk, hanem azzal, hogy kiket szeretne elérni, milyen problémára ad megoldást, és miért választanák pont az Ön vállalkozását.'],
-  ['02', 'fa-pen-ruler', 'Megtervezzük az ügyfélszerző rendszert', 'Felépítjük az oldal logikáját: milyen üzenet fogadja a látogatót, milyen bizalmi elemekre van szükség, hol kérjen ajánlatot, és milyen SEO kulcsszavakra építsünk.'],
-  ['03', 'fa-code', 'Megépítjük a weboldalt és a funkciókat', 'Gyors, reszponzív, keresőbarát weboldalt fejlesztünk, amelyben a szöveg, a felület, az űrlapok és az egyedi funkciók egy irányba dolgoznak.'],
-  ['04', 'fa-rocket', 'Élesítünk, mérünk és javítunk', 'Indulás után is az a cél, hogy több jó érdeklődő érkezzen. Beállítjuk az indexelést segítő elemeket, és a visszajelzések alapján tovább fejleszthető alapot adunk.'],
-];
-
-const values = [
-  {
-    icon: 'fa-message',
-    title: 'Érthető üzleti üzenetet írunk',
-    text: 'A látogatónak néhány másodperc alatt értenie kell, mit kínál, kinek segít és miért érdemes felvenni Önnel a kapcsolatot. Erre épül a teljes weboldal szövegezése.',
-  },
-  {
-    icon: 'fa-chart-line',
-    title: 'A weboldalt értékesítési eszközként kezeljük',
-    text: 'A webdesign, a webfejlesztés és a SEO nem különálló elemek. Egy rendszerként dolgoznak azért, hogy az oldal ne csak szép legyen, hanem érdeklődőket hozzon.',
-  },
-  {
-    icon: 'fa-layer-group',
-    title: 'Növekedésre alkalmas alapot adunk',
-    text: 'A kezdeti ügyfélszerző weboldal később bővíthető webalkalmazással, automatizált folyamattal, admin felülettel vagy új szolgáltatási aloldalakkal.',
-  },
-];
-
-const faqs = [
-  {
-    question: 'Mit jelent az, hogy ügyfélszerző rendszert építünk?',
-    answer: 'Azt, hogy a weboldal nem csak online névjegykártya. A tartalom, a webdesign, a technikai SEO, a kapcsolatfelvételi lehetőségek és az egyedi funkciók együtt dolgoznak azért, hogy több látogatóból legyen érdeklődő.',
-  },
-  {
-    question: 'A weboldal készítés mellett SEO-t is tartalmaz a munka?',
-    answer: 'Igen. Már a tervezésnél figyelünk a keresőoptimalizált oldalstruktúrára, a címekre, meta leírásokra, gyors betöltésre, mobilbarát működésre, indexelhető tartalomra, sitemapre és a kulcsszavak természetes használatára.',
-  },
-  {
-    question: 'Kinek éri meg ilyen weboldalt készíttetni?',
-    answer: 'Olyan szolgáltató vállalkozásoknak, helyi cégeknek, sportkluboknak és szakértőknek, akik nem csak jelen akarnak lenni az interneten, hanem több megkeresést, ajánlatkérést vagy ügyfélkapcsolatot szeretnének.',
-  },
-];
-
-const title = 'Ügyfélszerző weboldal készítés és webfejlesztés | WebsiteBusiness';
-const description =
-  'Ügyfélszerző rendszert építünk vállalkozásoknak: keresőbarát weboldal készítés, webfejlesztés, egyedi webalkalmazás és SEO alapozás egy helyen.';
-
+const title = 'Weboldal készítés és webfejlesztés vállalkozásoknak | WebsiteBusiness';
+const description = 'Konverzióra tervezett weboldal készítés, landing page készítés és egyedi webalkalmazás-fejlesztés vállalkozásoknak. Beszéljük át a projektet.';
 const faqStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map((item) => ({
+  mainEntity: content.faq.items.map((item) => ({
     '@type': 'Question',
     name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
   })),
 };
 ---
 
 <BaseLayout {title} {description}>
   <Header />
-
-  <main>
-    <section id="kezdolap" class="relative overflow-hidden bg-white pt-20">
-      <div class="absolute inset-x-0 top-20 h-px bg-line"></div>
-
-      <div class="container-shell relative flex min-h-[calc(100svh-5rem)] flex-col items-center justify-start py-16 text-center md:py-20 lg:justify-center lg:py-24">
-        <div class="reveal inline-flex items-center gap-2.5 border border-[#cdd7eb] bg-[#f5f8ff] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-brand">
-          <span class="signal-dot size-1.5 rounded-full bg-brand"></span>
-          Weboldal készítés + webfejlesztés vállalkozóknak
-        </div>
-
-        <h1
-          class="reveal delay-1 mt-8 max-w-5xl text-[clamp(3rem,6.5vw,5.9rem)] font-semibold leading-[0.94] tracking-[-0.072em]"
-          aria-label="Ügyfélszerző rendszert építünk vállalkozásoknak."
-        >
-          <span class="block">Ügyfélszerző </span>
-          <span class="block">rendszert építünk </span>
-          <span class="block text-brand">vállalkozásoknak.</span>
-        </h1>
-
-        <p class="reveal delay-2 mt-8 max-w-3xl text-lg leading-8 text-muted md:text-xl md:leading-9">
-          A weboldal készítés nálunk nem csak látványos felületet jelent. Olyan keresőbarát weboldalt, webfejlesztést és digitális folyamatot kap, amely érthetően értékesít, bizalmat épít és több érdeklődőt hoz.
-        </p>
-
-        <div class="reveal delay-3 mt-10 flex w-full max-w-xl flex-col justify-center gap-3 sm:flex-row">
-          <a href="#kapcsolat" class="button-primary min-h-14 flex-1 !px-6">
-            Kérek egy díjmentes konzultációt
-            <ArrowIcon />
-          </a>
-          <a href="#szolgaltatasok" class="button-secondary min-h-14 flex-1 !px-6">
-            Hogyan működik?
-          </a>
-        </div>
-
-        <p class="reveal delay-3 mt-5 text-sm font-semibold text-muted">
-          20 perc. Konkrét ötletek. Őszinte visszajelzés arról, hogyan szerezhet több ügyfelet online.
-        </p>
-
-        <div class="living-strip reveal delay-3 mt-14 flex w-full max-w-3xl flex-col items-center justify-center gap-5 border-y border-line py-5 sm:flex-row sm:gap-8">
-          <span class="text-[0.68rem] font-extrabold uppercase tracking-[0.17em] text-muted">Már minket választott</span>
-          <span class="hidden h-5 w-px bg-line sm:block"></span>
-          <a href="#referencia" class="group flex items-center gap-3 font-extrabold">
-            <img src="/images/fonix-logo.webp" width="500" height="500" alt="" class="size-9 object-contain" />
-            Főnix Box Club
-            <span class="text-brand transition-transform group-hover:translate-x-1"><ArrowIcon /></span>
-          </a>
-        </div>
-
-        <div class="reveal delay-3 mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold text-muted">
-          <span class="flex items-center gap-2">
-            <i class="fa-solid fa-bullseye text-brand" aria-hidden="true"></i>
-            Ajánlatra épített tartalom
-          </span>
-          <span class="flex items-center gap-2">
-            <i class="fa-solid fa-mobile-screen-button text-brand" aria-hidden="true"></i>
-            Gyors, mobilbarát weboldal
-          </span>
-          <span class="flex items-center gap-2">
-            <i class="fa-solid fa-chart-simple text-brand" aria-hidden="true"></i>
-            SEO és mérhető növekedés
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <section id="szolgaltatasok" class="section-space">
-      <div class="container-shell">
-        <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-          <div class="reveal">
-            <p class="eyebrow">Mit építünk?</p>
-            <h2 class="section-title mt-6">Nem csak weboldalt. Ügyfélszerző rendszert.</h2>
-          </div>
-          <p class="section-copy reveal delay-1 lg:mt-10">
-            Egy jó vállalkozói weboldalnak három dolgot kell tudnia: legyen megtalálható a Google-ben, legyen meggyőző a látogatónak, és legyen egyszerű kapcsolatba lépni Önnel. Mi ezt a három célt kötjük össze weboldal készítéssel, webfejlesztéssel és SEO szemléletű tartalommal.
-          </p>
-        </div>
-
-        <div class="mt-16 grid border-l border-t border-line md:grid-cols-3">
-          {
-            services.map((service, index) => (
-              <article class={`reveal delay-${index + 1} flex min-h-[27rem] flex-col border-b border-r border-line p-7 transition-colors hover:bg-surface lg:p-9`}>
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-extrabold tracking-[0.16em] text-brand">{service.number}</span>
-                  <span class="service-icon flex size-12 items-center justify-center bg-[#eaf0ff] text-lg text-brand">
-                    <i class={`fa-solid ${service.icon}`} aria-hidden="true"></i>
-                  </span>
-                </div>
-                <h3 class="mt-12 text-2xl font-semibold tracking-[-0.035em] lg:text-3xl">{service.title}</h3>
-                <p class="mt-5 leading-7 text-muted">{service.text}</p>
-                <ul class="mt-auto space-y-3 pt-10">
-                  {service.features.map((feature) => (
-                    <li class="flex items-center gap-3 border-t border-line pt-3 text-sm font-bold">
-                      <i class="fa-solid fa-check text-xs text-brand" aria-hidden="true"></i>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="folyamat" class="section-space bg-[#111827] text-white">
-      <div class="container-shell">
-        <div class="flex flex-col justify-between gap-7 md:flex-row md:items-end">
-          <div class="reveal">
-            <p class="eyebrow !text-[#76a2ff]">Így lesz belőle rendszer</p>
-            <h2 class="section-title mt-6">A stratégia, a szöveg és a fejlesztés egy irányba dolgozik.</h2>
-          </div>
-          <p class="reveal delay-1 max-w-md leading-7 text-white/65">
-            A cél nem az, hogy legyen még egy weboldala. A cél az, hogy az online jelenléte érthetőbb, hitelesebb és eredményesebb legyen.
-          </p>
-        </div>
-
-        <ol class="mt-16 grid border-l border-t border-white/15 md:grid-cols-2 xl:grid-cols-4">
-          {
-            process.map(([number, icon, heading, text], index) => (
-              <li class={`reveal delay-${Math.min(index + 1, 3)} min-h-72 border-b border-r border-white/15 p-7 lg:p-8`}>
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-extrabold tracking-[0.16em] text-[#76a2ff]">{number}</span>
-                  <span class="flex size-11 items-center justify-center border border-white/15 text-[#76a2ff]">
-                    <i class={`fa-solid ${icon}`} aria-hidden="true"></i>
-                  </span>
-                </div>
-                <h3 class="mt-12 text-xl font-semibold tracking-[-0.025em]">{heading}</h3>
-                <p class="mt-4 text-sm leading-7 text-white/60">{text}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section id="referencia" class="section-space">
-      <div class="container-shell">
-        <div class="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
-          <div class="reveal">
-            <p class="eyebrow">Kiemelt referencia</p>
-            <h2 class="section-title mt-6">Főnix Box Club ügyfélszerző weboldal</h2>
-          </div>
-          <a href="https://www.fonixboxclub.hu" target="_blank" rel="noopener noreferrer" class="button-secondary reveal">
-            Élő weboldal
-            <ArrowIcon external />
-          </a>
-        </div>
-
-        <div class="reveal delay-1 mt-12 overflow-hidden border border-line bg-[#090909] p-2 sm:p-3">
-          <img
-            src="/images/fonix-reference.webp"
-            width="2547"
-            height="943"
-            alt="A Főnix Box Club számára készített reszponzív, ügyfélszerző weboldal kezdőlapja"
-            class="h-auto w-full"
-            loading="lazy"
-          />
-        </div>
-
-        <div class="mt-10 flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-          <div class="reveal">
-            <div class="flex items-center gap-4">
-              <img src="/images/fonix-logo.webp" width="500" height="500" alt="Főnix Box Club logó" class="size-14 object-contain" loading="lazy" />
-              <div>
-                <div class="font-extrabold">Főnix Box Club</div>
-                <div class="mt-1 text-sm text-muted">Sportegyesület</div>
-              </div>
-            </div>
-            <div class="mt-8 flex flex-wrap gap-2">
-              {['Reszponzív weboldal', 'Admin felület', 'Gyors működés', 'Könnyű használat'].map((item) => (
-                <span class="border border-line bg-surface px-3 py-2 text-xs font-bold text-muted">{item}</span>
-              ))}
-            </div>
-          </div>
-
-          <div class="reveal delay-1 max-w-xl lg:text-right">
-            <h3 class="text-xl font-semibold leading-snug tracking-[-0.025em] md:text-2xl">
-              Modern weboldal, amely nem csak bemutat, hanem segít elérni az érdeklődőket.
-            </h3>
-            <p class="mt-3 leading-7 text-muted">Átlátható felület a látogatóknak, egyszerű kezelés a klubnak, stabil alap a további online növekedéshez.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="velemenyek" class="section-space border-y border-line bg-surface">
-      <div class="container-shell">
-        <div class="reveal text-center">
-          <p class="eyebrow">Ügyfélvélemények</p>
-          <h2 class="section-title mx-auto mt-6">A jó webes jelenlét üzleti eredményben mérhető.</h2>
-        </div>
-
-        <div class="mt-14 grid items-start border-l border-t border-line lg:grid-cols-2">
-          <blockquote class="reveal flex flex-col self-start border-b border-r border-line bg-white p-7 sm:p-9">
-            <i class="fa-solid fa-quote-left text-2xl text-brand" aria-hidden="true"></i>
-            <p class="mt-6 text-xl font-medium leading-9 tracking-[-0.02em]">
-              "A webes fejlesztések és az online megjelenések nagyban hozzájárultak ahhoz, hogy klubunk egyre több emberhez eljusson."
-            </p>
-            <footer class="flex items-center gap-4 pt-10">
-              <img src="/images/fonix-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" loading="lazy" />
-              <div>
-                <div class="font-extrabold">Csaba</div>
-                <div class="mt-1 text-sm text-muted">Főnix Box Club</div>
-              </div>
-            </footer>
-          </blockquote>
-
-          <blockquote class="reveal delay-1 flex flex-col self-start border-b border-r border-line bg-white p-7 sm:p-9">
-            <i class="fa-solid fa-quote-left text-2xl text-brand" aria-hidden="true"></i>
-            <p class="mt-6 text-xl font-medium leading-9 tracking-[-0.02em]">
-              "Zoli már a közös munkánk elején gyorsan ráérzett, milyen marketing tartalomra és hirdetésre van szükségem ahhoz, hogy az emberek felfigyeljenek a vállalkozásomra."
-            </p>
-            <footer class="flex items-center gap-4 pt-10">
-              <img src="/images/cleancar-logo.webp" width="500" height="500" alt="" class="size-12 object-contain" loading="lazy" />
-              <div>
-                <div class="font-extrabold">Ádám</div>
-                <div class="mt-1 text-sm text-muted">Cleancar Szolnok</div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <section id="rolunk" class="section-space">
-      <div class="container-shell">
-        <div class="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
-          <div class="reveal">
-            <p class="eyebrow">Miért WebsiteBusiness?</p>
-            <h2 class="section-title mt-6">Webfejlesztő csapat, üzleti gondolkodással.</h2>
-            <p class="section-copy mt-7">
-              A legtöbb vállalkozónak nem egyszerűen weboldalra van szüksége, hanem több jó megkeresésre. Ezért a technikai kivitelezés mellett az ajánlatot, a tartalmat, a felhasználói útvonalat és a SEO alapokat is rendszerben kezeljük.
-            </p>
-          </div>
-
-          <div class="border-t border-line">
-            {
-              values.map((value, index) => (
-                <article class={`reveal delay-${index + 1} grid gap-5 border-b border-line py-9 sm:grid-cols-[3.5rem_1fr]`}>
-                  <span class="flex size-12 items-center justify-center bg-[#eaf0ff] text-brand">
-                    <i class={`fa-solid ${value.icon}`} aria-hidden="true"></i>
-                  </span>
-                  <div>
-                    <h3 class="text-xl font-semibold tracking-[-0.025em]">{value.title}</h3>
-                    <p class="mt-3 max-w-xl leading-7 text-muted">{value.text}</p>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="gyik" class="section-space border-y border-line bg-surface">
-      <div class="container-shell">
-        <div class="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
-          <div class="reveal">
-            <p class="eyebrow">Gyakori kérdések</p>
-            <h2 class="section-title mt-6">Weboldal készítés, webfejlesztés és ügyfélszerzés érthetően.</h2>
-          </div>
-          <div class="border-t border-line">
-            {
-              faqs.map((item, index) => (
-                <article class={`reveal delay-${Math.min(index + 1, 3)} border-b border-line py-7`}>
-                  <h3 class="text-xl font-semibold">{item.question}</h3>
-                  <p class="mt-3 leading-7 text-muted">{item.answer}</p>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="kapcsolat" class="section-space">
-      <div class="container-shell">
-        <div class="relative overflow-hidden bg-brand px-6 py-14 text-white sm:px-12 sm:py-16 lg:px-20 lg:py-20">
-          <div class="absolute right-0 top-0 size-36 translate-x-1/3 -translate-y-1/3 border-[28px] border-white/12"></div>
-          <div class="relative grid items-end gap-12 lg:grid-cols-[1fr_auto]">
-            <div class="reveal">
-              <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-white/70">Indítsuk el</p>
-              <h2 class="mt-6 max-w-3xl text-[clamp(2.5rem,5.5vw,5rem)] font-semibold leading-[1.02] tracking-[-0.055em]">
-                Nézzük meg, milyen ügyfélszerző rendszer működne az Ön vállalkozásának.
-              </h2>
-            </div>
-            <div class="reveal delay-1 flex min-w-64 flex-col gap-3">
-              <a href="tel:+36205694772" class="flex min-h-14 items-center justify-between bg-white px-5 font-extrabold text-ink transition-colors hover:bg-[#edf2ff]">
-                <span class="flex items-center gap-3">
-                  <i class="fa-solid fa-phone text-brand" aria-hidden="true"></i>
-                  +36 20 569 4772
-                </span>
-                <ArrowIcon />
-              </a>
-              <a href="mailto:info@websitebusiness.hu" class="flex min-h-14 items-center justify-between border border-white/35 px-5 font-extrabold text-white transition-colors hover:bg-white/10">
-                <span class="flex items-center gap-3">
-                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                  Írjon e-mailt
-                </span>
-                <ArrowIcon />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-line">
-    <div class="container-shell grid gap-10 py-12 md:grid-cols-[1fr_auto] md:items-end">
-      <div>
-        <a href="#kezdolap" class="inline-flex items-center gap-3" aria-label="WebsiteBusiness főoldal">
-          <img src="/images/logo.webp" width="200" height="200" alt="" class="size-10 object-contain" loading="lazy" />
-          <span class="text-base font-extrabold tracking-[-0.035em]">WebsiteBusiness</span>
-        </a>
-        <p class="mt-5 max-w-md text-sm leading-7 text-muted">Ügyfélszerző weboldal készítés, webfejlesztés, egyedi webalkalmazás és SEO alapozás vállalkozásoknak.</p>
-      </div>
-      <div class="flex flex-col gap-3 text-sm font-bold text-muted sm:flex-row sm:gap-6">
-        <a class="transition-colors hover:text-ink" href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a>
-        <a class="transition-colors hover:text-ink" href="https://www.instagram.com/websitebusinesshu/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a class="transition-colors hover:text-ink" href="https://www.facebook.com/profile.php?id=61566883799064" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a class="transition-colors hover:text-ink" href="/adatkezelesi-tajekoztato/">Adatkezelési tájékoztató</a>
-      </div>
-    </div>
-    <div class="border-t border-line">
-      <div class="container-shell flex flex-col gap-2 py-5 text-xs font-semibold text-muted sm:flex-row sm:items-center sm:justify-between">
-        <span>&copy; {new Date().getFullYear()} WebsiteBusiness. Minden jog fenntartva.</span>
-        <span>Magyarország | Országos együttműködés</span>
-      </div>
-    </div>
-  </footer>
-
+  <LandingPage {content} />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
 </BaseLayout>

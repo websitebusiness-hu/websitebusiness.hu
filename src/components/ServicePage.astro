@@ -1,0 +1,168 @@
+---
+import ArrowIcon from './ArrowIcon.astro';
+
+interface ServiceContent {
+  breadcrumb: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  primaryCta: string;
+  primarySubject: string;
+  proof: string;
+  summary: {
+    title: string;
+    text: string;
+    points: string[];
+  };
+  outcomes: Array<{ title: string; text: string }>;
+  process: Array<{ title: string; text: string }>;
+  faq: Array<{ question: string; answer: string }>;
+  related: Array<{ href: string; title: string; text: string }>;
+  contact: {
+    title: string;
+    text: string;
+    cta: string;
+  };
+}
+
+interface Props {
+  content: ServiceContent;
+}
+
+const { content } = Astro.props;
+const emailHref = `mailto:info@websitebusiness.hu?subject=${encodeURIComponent(content.primarySubject)}`;
+---
+
+<main>
+  <section class="service-page-hero">
+    <div class="service-hero-ring service-hero-ring--one" aria-hidden="true"></div>
+    <div class="service-hero-ring service-hero-ring--two" aria-hidden="true"></div>
+    <div class="container-shell service-hero-layout">
+      <div>
+        <nav class="breadcrumb" aria-label="Morzsamenü"><a href="/">WebsiteBusiness</a><span>/</span><span>{content.breadcrumb}</span></nav>
+        <p class="eyebrow">{content.eyebrow}</p>
+        <h1>{content.title}</h1>
+        <p class="service-hero-intro">{content.intro}</p>
+        <a class="button-primary service-hero-cta" href={emailHref}>{content.primaryCta}<ArrowIcon /></a>
+        <p class="service-proof"><span>✦</span>{content.proof}</p>
+      </div>
+      <div class="service-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 520 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="service-art-path service-art-path--one" d="M33 285C123 285 116 88 235 111C333 131 338 286 483 182" />
+          <path class="service-art-path service-art-path--two" d="M33 152C141 169 143 343 276 327C377 316 382 109 484 93" />
+          <circle class="service-art-node" cx="235" cy="111" r="10" />
+          <circle class="service-art-node service-art-node--accent" cx="276" cy="327" r="10" />
+          <circle class="service-art-target" cx="483" cy="182" r="19" />
+          <path class="service-art-target-mark" d="M475 182h16M483 174v16" />
+        </svg>
+        <span class="service-art-label service-art-label--one">stratégia</span>
+        <span class="service-art-label service-art-label--two">megoldás</span>
+        <span class="service-art-label service-art-label--three">eredmény</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space service-summary-section">
+    <div class="container-shell service-summary-layout">
+      <div>
+        <p class="eyebrow">Mit kapsz?</p>
+        <h2 class="section-title">{content.summary.title}</h2>
+      </div>
+      <div>
+        <p class="section-copy">{content.summary.text}</p>
+        <ul class="service-point-list">
+          {content.summary.points.map((point) => <li>{point}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-outcomes-section">
+    <div class="container-shell">
+      <p class="eyebrow">A jó irány kézzelfogható</p>
+      <div class="service-outcomes-list">
+        {
+          content.outcomes.map((outcome) => (
+            <article>
+              <h2>{outcome.title}</h2>
+              <p>{outcome.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space service-process-section">
+    <div class="container-shell service-process-layout">
+      <div>
+        <p class="eyebrow">Így indul a közös munka</p>
+        <h2 class="section-title">A te helyzetedből indulunk.</h2>
+      </div>
+      <ol>
+        {
+          content.process.map((step) => (
+            <li><span></span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-space service-faq-section">
+    <div class="container-shell service-faq-layout">
+      <div><p class="eyebrow">Gyakori kérdések</p><h2 class="section-title">A döntés előtt ezt tisztázzuk.</h2></div>
+      <div class="faq-list">
+        {
+          content.faq.map((item) => (
+            <details class="faq-item">
+              <summary><span>{item.question}</span><i aria-hidden="true">+</i></summary>
+              <div class="faq-answer"><p>{item.answer}</p></div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="service-related-section">
+    <div class="container-shell">
+      <p class="eyebrow">Kapcsolódó megoldások</p>
+      <div class="service-related-list">
+        {
+          content.related.map((item) => (
+            <a href={item.href}>
+              <span>{item.title}</span>
+              <p>{item.text}</p>
+              <ArrowIcon />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="service-contact-section">
+    <div class="container-shell">
+      <p class="eyebrow">Első beszélgetés</p>
+      <h2>{content.contact.title}</h2>
+      <p>{content.contact.text}</p>
+      <a class="button-primary" href={emailHref}>{content.contact.cta}<ArrowIcon /></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container-shell site-footer-main">
+    <div>
+      <a href="/" aria-label="WebsiteBusiness főoldal"><img src="/images/header-logo.webp" width="1223" height="147" alt="WebsiteBusiness" loading="lazy" /></a>
+      <p>Weboldalak, kampánylandingek és egyedi üzleti rendszerek növekvő vállalkozásoknak.</p>
+    </div>
+    <div class="site-footer-links">
+      <a href="mailto:info@websitebusiness.hu">info@websitebusiness.hu</a>
+      <a href="/">Főoldal</a>
+      <a href="/adatkezelesi-tajekoztato/">Adatkezelési tájékoztató</a>
+    </div>
+  </div>
+  <div class="site-footer-meta"><div class="container-shell"><span>&copy; {new Date().getFullYear()} WebsiteBusiness. Minden jog fenntartva.</span><span>Magyarország · országos együttműködés</span></div></div>
+</footer>

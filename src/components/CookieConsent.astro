@@ -1,0 +1,84 @@
+---
+interface Props {
+  lang?: 'hu' | 'en';
+}
+
+const { lang = 'hu' } = Astro.props;
+const isEnglish = lang === 'en';
+---
+
+<aside class="cookie-banner hidden" aria-label={isEnglish ? 'Cookie preferences' : 'Süti beállítások'} data-cookie-banner>
+  <p class="font-mono text-[0.64rem] font-bold tracking-[0.12em] text-brand uppercase">
+    {isEnglish ? 'Analytics preferences' : 'Analitikai beállítások'}
+  </p>
+  <p class="mt-3 text-sm leading-6 text-muted">
+    {isEnglish
+      ? 'With your permission, we use analytics to understand how the website is used.'
+      : 'Engedélyével analitikai sütit használunk, hogy megértsük, hogyan használják az oldalt.'}
+    <a class="ml-1 font-bold text-ink underline decoration-ink/30 underline-offset-4" href="/adatkezelesi-tajekoztato/">
+      {isEnglish ? 'Privacy notice' : 'Adatkezelési tájékoztató'}
+    </a>
+  </p>
+  <div class="mt-5 flex flex-wrap gap-2">
+    <button type="button" class="border border-line px-3 py-2 text-xs font-bold text-ink transition-colors hover:bg-surface" data-cookie-reject>
+      {isEnglish ? 'Decline' : 'Elutasítom'}
+    </button>
+    <button type="button" class="bg-brand px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-brand-dark" data-cookie-accept>
+      {isEnglish ? 'Allow analytics' : 'Engedélyezem'}
+    </button>
+  </div>
+</aside>
+
+<script is:inline>
+  const consentKey = 'wb-analytics-consent';
+  const measurementId = 'G-5CM42NV1QQ';
+  const banner = document.querySelector<HTMLElement>('[data-cookie-banner]');
+  const acceptButton = document.querySelector<HTMLButtonElement>('[data-cookie-accept]');
+  const rejectButton = document.querySelector<HTMLButtonElement>('[data-cookie-reject]');
+
+  const loadAnalytics = () => {
+    if (document.querySelector(`script[data-wb-analytics="${measurementId}"]`)) return;
+
+    const analyticsWindow = window;
+
+    analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+    analyticsWindow.gtag = (...args) => {
+      analyticsWindow.dataLayer?.push(args);
+    };
+    analyticsWindow.gtag('js', new Date());
+    analyticsWindow.gtag('config', measurementId);
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    script.dataset.wbAnalytics = measurementId;
+    document.head.append(script);
+  };
+
+  const setConsent = (value) => {
+    try {
+      localStorage.setItem(consentKey, value);
+    } catch {
+      // Analytics stays off if storage is unavailable.
+    }
+
+    if (value === 'accepted') loadAnalytics();
+    banner?.classList.add('hidden');
+  };
+
+  let storedConsent = null;
+  try {
+    storedConsent = localStorage.getItem(consentKey);
+  } catch {
+    storedConsent = null;
+  }
+
+  if (storedConsent === 'accepted') {
+    loadAnalytics();
+  } else if (storedConsent !== 'rejected') {
+    banner?.classList.remove('hidden');
+  }
+
+  acceptButton?.addEventListener('click', () => setConsent('accepted'));
+  rejectButton?.addEventListener('click', () => setConsent('rejected'));
+</script>

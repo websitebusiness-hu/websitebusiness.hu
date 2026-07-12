@@ -1,0 +1,60 @@
+---
+import Header from '../components/Header.astro';
+import ServicePage from '../components/ServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Weboldal készítés vállalkozásoknak | WebsiteBusiness';
+const description = 'Egyedi, mobilbarát weboldal készítés és webfejlesztés vállalkozásoknak. Érthető ajánlat, gyors felület és könnyű kapcsolatfelvétel.';
+
+const content = {
+  breadcrumb: 'Weboldal készítés',
+  eyebrow: 'Céges weboldal készítés',
+  title: 'Weboldal készítés üzleti céllal.',
+  intro: 'Céges weboldal, amely érthető ajánlatot, bizalmat és jobb megkereséseket épít.',
+  primaryCta: 'Beszéljük át a weboldalt',
+  primarySubject: 'Weboldal készítés – első egyeztetés',
+  proof: 'Egyedi webdesign, reszponzív webfejlesztés és SEO-tudatos alap egy projektben.',
+  summary: {
+    title: 'Nem több szöveg. Jobb döntési út.',
+    text: 'Előbb tisztázzuk az ajánlatot és a következő lépést, majd felépítjük hozzá a szerkezetet, szöveget és felületet.',
+    points: ['Ajánlatra épített oldalstruktúra', 'Mobilbarát, gyors webfejlesztés', 'Keresőbarát technikai alapok', 'Egyértelmű kapcsolatfelvételi útvonal'],
+  },
+  outcomes: [
+    { title: 'Érthetőbb ajánlat', text: 'A szolgáltatás és az előny nem marad a sorok között: a megfelelő üzenet a megfelelő helyen jelenik meg.' },
+    { title: 'Több bizalom a kapcsolatfelvétel előtt', text: 'A felépítés, a referencia és a részletek együtt segítenek a látogatónak jó döntést hozni.' },
+    { title: 'Bővíthető digitális alap', text: 'A kezdeti weboldal később új szolgáltatásoldalakkal, kampányoldalakkal vagy egyedi funkciókkal is fejlődhet.' },
+  ],
+  process: [
+    { title: 'Megértjük, mit kell elmondania az oldalnak', text: 'Célcsoport, ajánlat, különbségek és a kívánt kapcsolatfelvételi út: ezek adják a jó weboldal vázát.' },
+    { title: 'Megtervezzük a szerkezetet és a tartalmi irányt', text: 'Nem a látványból próbálunk üzleti üzenetet csinálni. Előbb a tartalom és a navigáció logikája áll össze.' },
+    { title: 'Fejlesztjük, teszteljük, élesítjük', text: 'A weboldal mobilon, asztali gépen és a valós kapcsolatfelvételi helyzetekben is végig van nézve.' },
+  ],
+  faq: [
+    { question: 'Készítetek bemutatkozó weboldalt kisebb vállalkozásnak is?', answer: 'Igen. A terjedelem a céltól függ: lehet fókuszált bemutatkozó oldal vagy részletesebb szolgáltatási weboldal. A lényeg, hogy a látogató gyorsan értse az ajánlatot és a következő lépést.' },
+    { question: 'A weboldal készítés része a szöveg és a SEO alap is?', answer: 'A közös tervezésben az ajánlat, a fontos üzenetek, az oldalstruktúra, a címek és a keresőbarát technikai alapok is helyet kapnak.' },
+    { question: 'Később bővíthető a weboldal?', answer: 'Igen. Úgy érdemes indulni, hogy a későbbi szolgáltatásoldalak, kampánylandingek vagy egyedi funkciók értelmesen csatlakozhassanak.' },
+  ],
+  related: [
+    { href: '/landing-page-keszites/', title: 'Landing page készítés', text: 'Egy kampány vagy ajánlat köré épített, fókuszált oldal több releváns érdeklődőért.' },
+    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webfejlesztés', text: 'Amikor nem csak láthatóbb, hanem egyszerűbb működésre is szükség van.' },
+  ],
+  contact: { title: 'Van weboldalötleted vagy jelenlegi oldalad?', text: 'Egy rövid egyeztetésen tisztázzuk a jó első lépést.', cta: 'Kérek egy első egyeztetést' },
+};
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Weboldal készítés vállalkozásoknak',
+  description,
+  serviceType: ['Weboldal készítés', 'Céges weboldal készítés', 'Webfejlesztés'],
+  url: 'https://websitebusiness.hu/weboldal-keszites/',
+  areaServed: { '@type': 'Country', name: 'Magyarország' },
+  provider: { '@id': 'https://websitebusiness.hu/#organization' },
+};
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <ServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
+</BaseLayout>
