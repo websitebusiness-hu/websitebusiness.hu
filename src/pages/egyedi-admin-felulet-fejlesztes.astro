@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import NicheServicePage from '../components/NicheServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
+
+const title = 'Egyedi admin felület fejlesztés cégeknek | WebsiteBusiness';
+const description = 'Egyedi admin felület fejlesztés vállalkozásoknak: Excel- és e-mail-körök kiváltása, jogosultságok, státuszok, riportok és integrációk egy helyen.';
+
+const content = {
+  breadcrumb: 'Egyedi admin felület fejlesztés',
+  eyebrow: 'Belső admin rendszer vállalkozásoknak',
+  title: 'Egyedi admin felület fejlesztés a napi működéshez.',
+  intro: 'A saját folyamataidra szabott, böngészőből elérhető admin rendszerrel egy helyre kerülhetnek a feladatok, státuszok és üzleti adatok — kevesebb Excel-táblával, e-maillel és kézi másolással.',
+  primaryCta: 'Beszéljük át a folyamatot',
+  primarySubject: 'Egyedi admin felület fejlesztés – első egyeztetés',
+  proof: 'Folyamatfelmérés, kattintható prototípus, jogosultságok, fejlesztés és bevezetési támogatás.',
+  situation: {
+    eyebrow: 'Amikor a táblázat már kevés',
+    title: 'Nem az Excel a probléma. A széteső folyamat az.',
+    text: 'Egy táblázat kiváló eszköz, amíg kevés ember, kevés állapot és kevés összefüggés kezelésére kell. A gond akkor kezdődik, amikor több fájlban él ugyanaz az adat, nem látszik a felelős, és a következő lépés személyes emlékezeten múlik.',
+    signs: [
+      'Ugyanazt az adatot több táblázatba vagy rendszerbe is kézzel rögzítitek',
+      'Nem egyértelmű, melyik fájl vagy sor tartalmazza az aktuális állapotot',
+      'A vezetői riportok elkészítése rendszeres manuális összesítést igényel',
+      'A kész szoftverek túl sokat tudnak, mégsem követik a saját munkafolyamatot',
+    ],
+  },
+  outcomes: [
+    { title: 'Egyértelmű állapot és felelős', text: 'Minden feladat vagy ügy a megfelelő státuszban, a hozzá tartozó adatokkal és felelőssel jelenik meg. Kevesebb idő megy el arra, hogy kiderüljön, hol tart a munka.' },
+    { title: 'Kevesebb kézi adatmozgatás', text: 'Az ismétlődő rögzítések, másolások és értesítések automatizálhatók. A szabályok ott segítenek, ahol valóban csökkentik a hibát, nem újabb merev folyamatot hoznak létre.' },
+    { title: 'Használhatóbb üzleti adatok', text: 'A jogosultságokkal kezelt, egységes adatstruktúrából pontosabb listák, szűrések és riportok készülhetnek. A döntéshez nem kell több fájlt kézzel összefésülni.' },
+  ],
+  scope: {
+    eyebrow: 'Lehetséges funkciók',
+    title: 'A folyamat dönti el, mi kerüljön bele.',
+    intro: 'Nem előre gyártott modulokat akarunk eladni. A használók, az adatok, a döntési pontok és a hibalehetőségek alapján áll össze az első verzió valóban szükséges funkcióköre.',
+    items: [
+      { title: 'Szerepkörök és jogosultságok', text: 'Munkatárs, vezető, partner vagy külső közreműködő csak azt látja és módosítja, ami a feladatához szükséges. A hozzáférések később is bővíthetők.' },
+      { title: 'Egyedi adatlapok és státuszfolyamatok', text: 'Ügyek, projektek, rendelések vagy eszközök a saját mezőkkel és állapotokkal kezelhetők. A kötelező lépések és ellenőrzések csökkentik a hiányos adatot.' },
+      { title: 'Keresés, szűrés és riportok', text: 'A napi operatív listák és vezetői nézetek ugyanabból az adatból készülnek. Export csak akkor kell, amikor valóban külső feldolgozás a cél.' },
+      { title: 'Integrációk és automatizálás', text: 'API-n keresztül összekapcsolható számlázóval, CRM-mel, weboldallal vagy más jogosan elérhető rendszerrel. Az e-mailes értesítések és dokumentumgenerálás is automatizálható.' },
+    ],
+  },
+  process: [
+    { title: 'Feltérképezzük a jelenlegi munkát', text: 'Nem egy kívánságlistából indulunk. Végignézzük a szereplőket, a bemenő adatokat, a döntési pontokat, a kivételeket és azt, hol keletkezik a legtöbb várakozás vagy hiba.' },
+    { title: 'Prototípussal ellenőrizzük a működést', text: 'A fontos képernyők és lépések kattintható formában már a fejlesztés előtt kipróbálhatók. A használók visszajelzése alapján olcsóbban és gyorsabban javítható a terv.' },
+    { title: 'Fokozatosan fejlesztünk és vezetünk be', text: 'Az első verzió a legnagyobb értéket adó folyamatot fedi le. Tesztadatokkal és valós helyzetekkel ellenőrizzük, majd dokumentáltan kerül használatba és később bővíthető.' },
+  ],
+  faq: [
+    { question: 'Mikor éri meg egyedi admin felületet fejleszteni?', answer: 'Akkor, ha egy rendszeresen ismétlődő, üzletileg fontos folyamat sok kézi munkát, hibát vagy késést okoz, és a kész szoftverek érdemben nem illeszkednek hozzá. Az első felmérés célja annak eldöntése is, hogy valóban egyedi fejlesztés a jó megoldás-e.' },
+    { question: 'Kiváltható vele az Excel?', answer: 'Azoknál a folyamatoknál igen, ahol közös adatforrásra, jogosultságokra, státuszokra, naplózásra vagy automatizálásra van szükség. Az Excel továbbra is hasznos maradhat eseti elemzéshez és exporthoz; nem cél minden táblázatot indokolatlanul rendszerbe kényszeríteni.' },
+    { question: 'Összeköthető a meglévő rendszereinkkel?', answer: 'Ha a másik rendszer dokumentált API-t, adatbázis-hozzáférést vagy biztonságos import-export lehetőséget biztosít, általában tervezhető integráció. A technikai és jogi hozzáférést minden kapcsolatnál külön ellenőrizzük.' },
+    { question: 'Biztonságos lesz a belső admin rendszer?', answer: 'A jogosultságkezelés, hitelesítés, naplózás, mentés és üzemeltetési környezet már a tervezés része. A szükséges védelmi szint az adatok érzékenységétől, a felhasználók számától és az üzleti kockázattól függ.' },
+    { question: 'Kell rögtön minden funkciót lefejleszteni?', answer: 'Nem. Az első verzió akkor jó, ha egy teljes, értékes folyamatot már használhatóan lefed, de nem próbál minden jövőbeli ötletet egyszerre megvalósítani. A valós használat alapján pontosabban priorizálható a következő fejlesztés.' },
+  ],
+  related: [
+    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webfejlesztés', text: 'Átfogó megoldás összetett üzleti folyamatok és webalkalmazások fejlesztéséhez.' },
+    { href: '/ugyfelportal-fejlesztes/', title: 'Ügyfélportál fejlesztés', text: 'Biztonságos önkiszolgáló felület ügyfeleknek, partnereknek és dokumentumoknak.' },
+    { href: '/weboldal-keszites/', title: 'Céges weboldal készítés', text: 'Ha a belső működés mellett az online bemutatkozást és ajánlatkérést is rendbe kell tenni.' },
+  ],
+  contact: { title: 'Túl sok a kézi kör Excelben és e-mailben?', text: 'Írd le röviden, kik dolgoznak a folyamatban, milyen adat mozog, és hol akad el leggyakrabban. Megnézzük, indokolt-e az egyedi admin fejlesztés.', cta: 'Kérek egy folyamatfelmérést' },
+};
+
+const structuredData = createServiceStructuredData({
+  name: 'Egyedi admin felület fejlesztés cégeknek',
+  description,
+  path: '/egyedi-admin-felulet-fejlesztes/',
+  serviceTypes: ['Egyedi admin felület fejlesztés', 'Belső admin rendszer', 'Üzleti folyamat automatizálás', 'Excel kiváltó rendszer'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <NicheServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</BaseLayout>

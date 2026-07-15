@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import ServicePage from '../components/ServicePage.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
 
 const title = 'Egyedi webfejlesztés és webalkalmazás fejlesztés | WebsiteBusiness';
 const description = 'Egyedi webfejlesztés, webalkalmazás és üzleti szoftver fejlesztés vállalkozásoknak. Kevesebb kézi kör, átláthatóbb belső folyamatok.';
@@ -35,22 +36,21 @@ const content = {
     { question: 'Minden funkciót rögtön az első verzióban kell elkészíteni?', answer: 'Nem. Általában jobb egy erős, használható első verzióból indulni, majd a valós visszajelzések alapján építeni tovább.' },
   ],
   related: [
+    { href: '/egyedi-admin-felulet-fejlesztes/', title: 'Egyedi admin felület fejlesztés', text: 'Belső feladatok, adatok és státuszok kezelése a saját működéshez igazítva.' },
+    { href: '/ugyfelportal-fejlesztes/', title: 'Ügyfélportál fejlesztés', text: 'Önkiszolgáló, biztonságos online felület ügyfeleknek és partnereknek.' },
     { href: '/weboldal-keszites/', title: 'Weboldal készítés', text: 'Amikor a következő lépés a világosabb online bemutatkozás és több jó érdeklődő.' },
-    { href: '/landing-page-keszites/', title: 'Landing page készítés', text: 'Amikor egy ajánlatnak vagy kampánynak kell fókuszált, konverzióra tervezett céloldal.' },
   ],
   contact: { title: 'Van egy akadozó folyamat, amelyhez kevés a kézi megoldás?', text: 'Egy rövid egyeztetésen megnézzük, hogy az egyedi webfejlesztés-e a jó következő lépés.', cta: 'Kérek egy első egyeztetést' },
 };
 
-const serviceStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
+const serviceStructuredData = createServiceStructuredData({
   name: 'Egyedi webfejlesztés és webalkalmazás fejlesztés',
   description,
-  serviceType: ['Egyedi webfejlesztés', 'Webalkalmazás fejlesztés', 'Egyedi szoftverfejlesztés'],
-  url: 'https://websitebusiness.hu/egyedi-webfejlesztes/',
-  areaServed: { '@type': 'Country', name: 'Magyarország' },
-  provider: { '@id': 'https://websitebusiness.hu/#organization' },
-};
+  path: '/egyedi-webfejlesztes/',
+  serviceTypes: ['Egyedi webfejlesztés', 'Webalkalmazás fejlesztés', 'Egyedi szoftverfejlesztés'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
 ---
 
 <BaseLayout {title} {description} hasLanguageAlternates={false}>

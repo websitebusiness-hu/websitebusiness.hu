@@ -2,18 +2,19 @@
 import Header from '../components/Header.astro';
 import ServicePage from '../components/ServicePage.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
 
-const title = 'Landing page készítés kampányokhoz | WebsiteBusiness';
-const description = 'Konverzióra tervezett landing page készítés hirdetéshez, ajánlathoz vagy új szolgáltatás bevezetéséhez. Fókuszált üzenet, egyértelmű CTA, mérhető alap.';
+const title = 'Landing page készítés hirdetéshez és kampányhoz | WebsiteBusiness';
+const description = 'Konverzióra tervezett landing page készítés Google Ads, Meta hirdetés, ajánlat vagy szolgáltatás bevezetéséhez. Gyors céloldal, világos CTA, mérhető alap.';
 
 const content = {
   breadcrumb: 'Landing page készítés',
-  eyebrow: 'Kampány és landing oldal készítés',
-  title: 'Landing page készítés egy jó döntésért.',
-  intro: 'Fókuszált céloldal ajánlathoz, kampányhoz vagy szolgáltatáshoz — világos üzenettel és következő lépéssel.',
+  eyebrow: 'Landing page készítés hirdetéshez',
+  title: 'Landing page készítés hirdetéshez és kampányhoz.',
+  intro: 'Fókuszált céloldal Google Ads vagy Meta hirdetéshez, ajánlathoz és szolgáltatásbevezetéshez — világos üzenettel, gyors betöltéssel és következő lépéssel.',
   primaryCta: 'Beszéljük át a landing oldalt',
   primarySubject: 'Landing page készítés – első egyeztetés',
-  proof: 'Kampányüzenet, oldalszerkezet és technikai kivitelezés egy cél köré szervezve.',
+  proof: 'Kampányüzenet, mobilbarát oldalszerkezet, konverziós pontok és technikai kivitelezés egy cél köré szervezve.',
   summary: {
     title: 'Kevesebb elterelés. Több releváns érdeklődő.',
     text: 'Tisztázzuk, honnan érkezik a látogató, mit ígér az ajánlat és milyen lépést várunk tőle.',
@@ -33,24 +34,25 @@ const content = {
     { question: 'Mikor érdemes külön landing oldalt készíteni?', answer: 'Ha egy hirdetés, új szolgáltatás, esemény vagy jól körülhatárolt ajánlat kap fókuszt. Ilyenkor egy külön céloldal tisztább döntési helyzetet ad, mint a főoldalra küldeni mindenkit.' },
     { question: 'A landing page lehet része a meglévő weboldalnak?', answer: 'Igen. A kampánycél és a márka alapján eldőlhet, hogy önálló oldalként vagy a meglévő weboldal jól elkülönülő részeként a jobb.' },
     { question: 'Tudtok segíteni a kampány üzenetének megfogalmazásában?', answer: 'Igen. A landing page készítésnél az üzenet, a célcsoport és az ajánlat tisztázása ugyanannyira fontos, mint maga a felület.' },
+    { question: 'Google Ads és Meta hirdetéshez is készülhet külön landing page?', answer: 'Igen. A céloldal üzenetét és felépítését ahhoz igazítjuk, milyen hirdetésből, milyen előzetes ígérettel érkezik a látogató. Külön ajánlatokhoz külön landing oldal is indokolt lehet.' },
+    { question: 'Mérhető lesz a landing oldal eredménye?', answer: 'Az oldal technikailag előkészíthető analitikai és konverziós események mérésére. A pontos mérési tervet a használt hirdetési és analitikai rendszerhez igazítjuk.' },
   ],
   related: [
     { href: '/weboldal-keszites/', title: 'Weboldal készítés', text: 'Amikor nem egy kampányt, hanem a teljes online bemutatkozást kell jól felépíteni.' },
-    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webfejlesztés', text: 'Ha a landing oldal mögött egyedi folyamat, admin vagy adatkapcsolat is kell.' },
+    { href: '/weboldal-keszites-kisvallalkozasoknak/', title: 'Weboldal kisvállalkozásoknak', text: 'Ha a kampány mellett stabil, kereshető céges online jelenlétre is szükség van.' },
+    { href: '/egyedi-admin-felulet-fejlesztes/', title: 'Egyedi admin felület', text: 'Ha a landing oldalról érkező érdeklődők kezeléséhez saját folyamat és admin is kell.' },
   ],
   contact: { title: 'Van egy ajánlatod, amelynek fókuszált oldal kell?', text: 'Nézzük meg, hogyan lesz az üzenetből erős landing oldal.', cta: 'Kérek egy első egyeztetést' },
 };
 
-const serviceStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Landing page készítés',
+const serviceStructuredData = createServiceStructuredData({
+  name: 'Landing page készítés hirdetéshez és kampányhoz',
   description,
-  serviceType: ['Landing page készítés', 'Landing oldal készítés', 'Kampányoldal fejlesztés'],
-  url: 'https://websitebusiness.hu/landing-page-keszites/',
-  areaServed: { '@type': 'Country', name: 'Magyarország' },
-  provider: { '@id': 'https://websitebusiness.hu/#organization' },
-};
+  path: '/landing-page-keszites/',
+  serviceTypes: ['Landing page készítés', 'Landing oldal készítés', 'Kampányoldal fejlesztés', 'Landing page készítés hirdetéshez'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
 ---
 
 <BaseLayout {title} {description} hasLanguageAlternates={false}>

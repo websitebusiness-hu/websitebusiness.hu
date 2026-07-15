@@ -50,6 +50,12 @@ interface LandingContent {
     intro: string;
     items: Solution[];
   };
+  specificSolutions?: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    items: Array<{ href: string; title: string; text: string }>;
+  };
   work: {
     eyebrow: string;
     title: string;
@@ -114,7 +120,6 @@ const isEnglish = lang === 'en';
 const ids = isEnglish
   ? { home: 'home', solutions: 'solutions', work: 'work', process: 'process', about: 'about', contact: 'contact' }
   : { home: 'kezdolap', solutions: 'megoldasok', work: 'munka', process: 'folyamat', about: 'rolunk', contact: 'kapcsolat' };
-const tickerItems = [...content.hero.ticker, ...content.hero.ticker, ...content.hero.ticker];
 const emailHref = `mailto:info@websitebusiness.hu?subject=${encodeURIComponent(content.contact.emailSubject)}`;
 const systemLabels = isEnglish ? ['brief', 'workflow', 'operations'] : ['brief', 'folyamat', 'működés'];
 ---
@@ -169,8 +174,10 @@ const systemLabels = isEnglish ? ['brief', 'workflow', 'operations'] : ['brief',
     <div class="hero-ticker" aria-hidden="true">
       <div class="hero-ticker-track">
         {
-          tickerItems.map((item) => (
-            <span>{item}<b>✦</b></span>
+          [0, 1].map(() => (
+            <div class="hero-ticker-group">
+              {content.hero.ticker.map((item) => <span>{item}<b>✦</b></span>)}
+            </div>
           ))
         }
       </div>
@@ -263,6 +270,31 @@ const systemLabels = isEnglish ? ['brief', 'workflow', 'operations'] : ['brief',
       </div>
     </div>
   </section>
+
+  {
+    content.specificSolutions && (
+      <section class="section-space specific-solutions-section">
+        <div class="container-shell">
+          <div class="editorial-heading">
+            <div>
+              <p class="eyebrow">{content.specificSolutions.eyebrow}</p>
+              <h2 class="section-title">{content.specificSolutions.title}</h2>
+            </div>
+            <p class="section-copy">{content.specificSolutions.intro}</p>
+          </div>
+          <div class="specific-solutions-list">
+            {content.specificSolutions.items.map((item) => (
+              <a href={item.href}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <span>Részletek <ArrowIcon /></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <section id={ids.work} class="section-space work-section">
     <div class="container-shell">

@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import NicheServicePage from '../components/NicheServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
+
+const title = 'Weboldal felújítás vállalkozásoknak | WebsiteBusiness';
+const description = 'Meglévő céges weboldal felújítása vállalkozásoknak: korszerű tartalom, mobilbarát design, gyorsabb betöltés és SEO-tudatos új oldalstruktúra.';
+
+const content = {
+  breadcrumb: 'Weboldal felújítás vállalkozásoknak',
+  eyebrow: 'Meglévő céges weboldal újratervezése',
+  title: 'Weboldal felújítás, ha a régi oldal már visszatart.',
+  intro: 'Újratervezzük a meglévő céges weboldal üzenetét, szerkezetét és technikai alapját, hogy mobilon is gyors, hiteles és könnyen használható legyen — a megőrzendő értékek elvesztése nélkül.',
+  primaryCta: 'Nézzük meg a jelenlegi oldalt',
+  primarySubject: 'Weboldal felújítás – első egyeztetés',
+  proof: 'Tartalmi és technikai felmérés, átirányítási terv, modern webdesign és mérhetően jobb alapok.',
+  situation: {
+    eyebrow: 'Nem csak a dizájn öregszik',
+    title: 'A régi weboldal láthatatlan költségeket okozhat.',
+    text: 'Egy elavult oldal nem feltétlenül hibás — egyszerűen már nem a mai ajánlatot, ügyféligényt vagy mobilos használatot szolgálja. A felújítás célja nem a látvány kedvéért történő csere, hanem a megtalálhatóság és a döntési út javítása.',
+    signs: [
+      'A szolgáltatások, árképzés vagy célcsoport megváltozott az oldal indulása óta',
+      'Mobilon lassú, szétesik vagy nehéz rajta kapcsolatba lépni',
+      'A Google-ből kevés releváns látogató érkezik a fontos aloldalakra',
+      'A tartalom frissítése körülményes, ezért az oldal rendszeresen elavul',
+    ],
+  },
+  outcomes: [
+    { title: 'Korszerűbb, pontosabb pozicionálás', text: 'A megújult oldal a vállalkozás jelenlegi ajánlatát és legerősebb ügyfélelőnyeit mutatja be. A látogató nem régi szolgáltatásokból és általános mondatokból próbál következtetni.' },
+    { title: 'Gyorsabb mobilos élmény', text: 'A fölösleges kód, nagy képek és nehéz sablonok helyett teljesítményre tervezett felület készül. A stabil elrendezés és az érintésbarát elemek csökkentik a súrlódást.' },
+    { title: 'Megőrzött SEO-érték', text: 'A hasznos régi URL-eket, tartalmakat és külső hivatkozásokat nem dobjuk el. URL-változás esetén átirányítási térkép védi a felhalmozott keresőértéket.' },
+  ],
+  scope: {
+    eyebrow: 'Felújítási terv',
+    title: 'Előbb mérünk, utána bontunk.',
+    intro: 'Nem minden régi elemet kell lecserélni. Feltárjuk, mi működik, hol akad el a látogató, és mely technikai vagy tartalmi részek jelentenek valódi kockázatot.',
+    items: [
+      { title: 'Tartalom- és oldalstruktúra audit', text: 'Átnézzük a szolgáltatásoldalakat, címsorokat, navigációt, belső linkeket és kapcsolatfelvételi pontokat. A megtartandó és újraírandó tartalom külön listát kap.' },
+      { title: 'SEO-migráció és URL-térkép', text: 'Felmérjük a jelenlegi indexelhető URL-eket. A megszűnő oldalak megfelelő célra irányítva maradnak, a canonical és sitemap pedig az új struktúrát követi.' },
+      { title: 'Új, reszponzív webdesign', text: 'A vizuális rendszer a márkát erősíti, miközben a fontos információk és CTA-k minden képernyőn egyértelműek. Nem látványelemmel fedjük el a tartalmi problémát.' },
+      { title: 'Teljesítmény és technikai SEO', text: 'A betöltési sorrend, képméretek, metaadatok, strukturált adatok és szemantikus HTML együtt adnak gyorsabb, kereshetőbb technikai alapot.' },
+    ],
+  },
+  process: [
+    { title: 'Felmérjük a jelenlegi weboldalt', text: 'A technikai állapot mellett azt is megvizsgáljuk, hogy az oldal mennyire tükrözi a mai ajánlatot. Összegyűjtjük a fontos URL-eket, tartalmakat, méréseket és üzleti elvárásokat.' },
+    { title: 'Elkészítjük az új struktúrát és migrációs tervet', text: 'Rögzítjük, mi marad, mi változik, mely oldalak egyesülnek, és hová mutatnak az átirányítások. Ezzel a fejlesztés és az élesítés kockázata is csökken.' },
+    { title: 'Újratervezünk, fejlesztünk és élesítés után ellenőrzünk', text: 'Az új oldalt több eszközön teszteljük, majd ellenőrizzük a belső linkeket, metaadatokat, indexelési jeleket, 404-es hibákat és átirányításokat.' },
+  ],
+  faq: [
+    { question: 'Mikor érdemes felújítani a meglévő weboldalt?', answer: 'Ha már nem tükrözi a vállalkozás ajánlatát, mobilon nehézkes, technikailag lassú, kevés jó megkeresést hoz vagy a módosítása rendszeresen problémát okoz. Egy felmérésből az is kiderülhet, hogy teljes újraépítés helyett célzott javítás elegendő.' },
+    { question: 'Elveszhetnek a jelenlegi Google-helyezések az új weboldal miatt?', answer: 'Egy rosszul kezelt váltás valóban okozhat visszaesést. Ezért kell indulás előtt URL-leltár, tartalmi megfeleltetés, 301-es átirányítási terv, helyes canonical és friss sitemap. A helyezés nem garantálható, de a meglévő értékek megőrzésének technikai feltételei kontrollálhatók.' },
+    { question: 'Megmaradhat a jelenlegi domain és e-mail cím?', answer: 'Igen. A weboldal felújítása általában ugyanazon a domainen történik, és az e-mail szolgáltatást sem kell emiatt lecserélni. Az élesítést úgy tervezzük, hogy a szükséges DNS- és tárhelymódosítások kontrolláltak legyenek.' },
+    { question: 'A régi szövegeket és képeket is át lehet venni?', answer: 'Igen, ha továbbra is pontosak, hasznosak és megfelelő minőségűek. Nem automatikus másolást végzünk: minden tartalomnál eldöntjük, hogy változatlanul marad, frissítést kap, másik oldalra kerül vagy elhagyható.' },
+    { question: 'Mérhetően gyorsabb lesz az új oldal?', answer: 'A fejlesztés során labor- és böngészős mérésekkel ellenőrizzük a betöltést és az elrendezés stabilitását. A valós Core Web Vitals eredményt később a felhasználói eszközök, hálózat és forgalom alapján a Search Console mutatja.' },
+  ],
+  related: [
+    { href: '/weboldal-keszites/', title: 'Céges weboldal készítés', text: 'Üzleti célú weboldaltervezés az ajánlattól a technikai megvalósításig.' },
+    { href: '/weboldal-keszites-kisvallalkozasoknak/', title: 'Weboldal kisvállalkozásoknak', text: 'Fókuszált, bővíthető weboldal kisebb cégek számára.' },
+    { href: '/landing-page-keszites/', title: 'Landing page készítés hirdetéshez', text: 'Ha a teljes oldal helyett egy kampány ajánlatát kell gyorsan és tisztán felépíteni.' },
+  ],
+  contact: { title: 'Nem tudod, javítás vagy újraépítés kell?', text: 'Küldd el a jelenlegi weboldal címét és írd meg, min szeretnél változtatni. Az első egyeztetésen kijelöljük a reális irányt.', cta: 'Kérek egy weboldal-felmérést' },
+};
+
+const structuredData = createServiceStructuredData({
+  name: 'Weboldal felújítás vállalkozásoknak',
+  description,
+  path: '/weboldal-felujitas-vallalkozasoknak/',
+  serviceTypes: ['Weboldal felújítás', 'Céges weboldal újratervezés', 'Honlap korszerűsítés'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <NicheServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</BaseLayout>

@@ -29,7 +29,12 @@ const isEnglish = lang === 'en';
   </div>
 </aside>
 
-<script is:inline>
+<script>
+  interface AnalyticsWindow extends Window {
+    dataLayer?: unknown[][];
+    gtag?: (...args: unknown[]) => void;
+  }
+
   const consentKey = 'wb-analytics-consent';
   const measurementId = 'G-5CM42NV1QQ';
   const banner = document.querySelector<HTMLElement>('[data-cookie-banner]');
@@ -39,7 +44,7 @@ const isEnglish = lang === 'en';
   const loadAnalytics = () => {
     if (document.querySelector(`script[data-wb-analytics="${measurementId}"]`)) return;
 
-    const analyticsWindow = window;
+    const analyticsWindow = window as AnalyticsWindow;
 
     analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
     analyticsWindow.gtag = (...args) => {
@@ -55,7 +60,7 @@ const isEnglish = lang === 'en';
     document.head.append(script);
   };
 
-  const setConsent = (value) => {
+  const setConsent = (value: 'accepted' | 'rejected') => {
     try {
       localStorage.setItem(consentKey, value);
     } catch {

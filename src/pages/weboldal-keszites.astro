@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import ServicePage from '../components/ServicePage.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
 
 const title = 'Weboldal készítés vállalkozásoknak | WebsiteBusiness';
 const description = 'Egyedi, mobilbarát weboldal készítés és webfejlesztés vállalkozásoknak. Érthető ajánlat, gyors felület és könnyű kapcsolatfelvétel.';
@@ -35,22 +36,21 @@ const content = {
     { question: 'Később bővíthető a weboldal?', answer: 'Igen. Úgy érdemes indulni, hogy a későbbi szolgáltatásoldalak, kampánylandingek vagy egyedi funkciók értelmesen csatlakozhassanak.' },
   ],
   related: [
-    { href: '/landing-page-keszites/', title: 'Landing page készítés', text: 'Egy kampány vagy ajánlat köré épített, fókuszált oldal több releváns érdeklődőért.' },
-    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webfejlesztés', text: 'Amikor nem csak láthatóbb, hanem egyszerűbb működésre is szükség van.' },
+    { href: '/weboldal-keszites-kisvallalkozasoknak/', title: 'Weboldal készítés kisvállalkozásoknak', text: 'Fókuszált, bővíthető céges weboldal kisebb vállalkozások valós üzleti céljaihoz.' },
+    { href: '/weboldal-felujitas-vallalkozasoknak/', title: 'Meglévő weboldal felújítása', text: 'Ha a jelenlegi oldal lassú, elavult vagy nem támogatja az ajánlatkérést.' },
+    { href: '/landing-page-keszites/', title: 'Landing page készítés hirdetéshez', text: 'Egy kampány vagy ajánlat köré épített, fókuszált oldal több releváns érdeklődőért.' },
   ],
   contact: { title: 'Van weboldalötleted vagy jelenlegi oldalad?', text: 'Egy rövid egyeztetésen tisztázzuk a jó első lépést.', cta: 'Kérek egy első egyeztetést' },
 };
 
-const serviceStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
+const serviceStructuredData = createServiceStructuredData({
   name: 'Weboldal készítés vállalkozásoknak',
   description,
-  serviceType: ['Weboldal készítés', 'Céges weboldal készítés', 'Webfejlesztés'],
-  url: 'https://websitebusiness.hu/weboldal-keszites/',
-  areaServed: { '@type': 'Country', name: 'Magyarország' },
-  provider: { '@id': 'https://websitebusiness.hu/#organization' },
-};
+  path: '/weboldal-keszites/',
+  serviceTypes: ['Weboldal készítés', 'Céges weboldal készítés', 'Webfejlesztés'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
 ---
 
 <BaseLayout {title} {description} hasLanguageAlternates={false}>

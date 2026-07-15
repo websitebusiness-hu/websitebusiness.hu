@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import NicheServicePage from '../components/NicheServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
+
+const title = 'Weboldal készítés kisvállalkozásoknak | WebsiteBusiness';
+const description = 'Gyors, mobilbarát és keresőbarát weboldal készítés kisvállalkozásoknak. Érthető ajánlat, bővíthető céges weboldal és közvetlen kapcsolatfelvétel.';
+
+const content = {
+  breadcrumb: 'Weboldal készítés kisvállalkozásoknak',
+  eyebrow: 'Céges weboldal kisebb vállalkozásoknak',
+  title: 'Weboldal készítés kisvállalkozásoknak, üzleti céllal.',
+  intro: 'Olyan gyors, mobilbarát céges weboldalt építünk, amely világosan bemutatja a szolgáltatásodat, bizalmat ad és megkönnyíti az ajánlatkérést — felesleges funkciók nélkül.',
+  primaryCta: 'Beszéljük át a weboldalt',
+  primarySubject: 'Weboldal készítés kisvállalkozásnak – első egyeztetés',
+  proof: 'Stratégia, szöveges irány, egyedi webdesign, fejlesztés és SEO-tudatos technikai alap egy folyamatban.',
+  situation: {
+    eyebrow: 'Ismerős helyzet?',
+    title: 'A kisvállalkozói weboldalnak gyorsan kell bizonyítania.',
+    text: 'A látogató gyakran telefonról érkezik, több szolgáltatót hasonlít össze, és néhány másodperc alatt dönti el, marad-e. Nem a legtöbb menüpont nyer, hanem az a weboldal, amely érthetően válaszol a fontos kérdéseire.',
+    signs: [
+      'A vállalkozásod csak közösségi oldalon vagy elavult honlapon található meg',
+      'Az érdeklődők újra és újra ugyanazokat az alapinformációkat kérdezik',
+      'Mobilon nehéz elolvasni az ajánlatot vagy elérni a kapcsolatfelvételt',
+      'Szeretnél megjelenni konkrét, releváns Google-keresésekre',
+    ],
+  },
+  outcomes: [
+    { title: 'Érthető ajánlat az első képernyőn', text: 'A látogató gyorsan megérti, kinek, milyen problémában és milyen eredménnyel segítesz. A szöveg nem általános bemutatkozással indul, hanem a döntéshez szükséges lényeget adja.' },
+    { title: 'Bizalom a kapcsolatfelvétel előtt', text: 'Valós referenciák, folyamat, gyakori kérdések és jól elhelyezett elérhetőségek csökkentik a bizonytalanságot. Így az érdeklődő felkészültebben ír vagy telefonál.' },
+    { title: 'Kereshető és bővíthető alap', text: 'A technikai SEO, a gyors betöltés és a logikus oldalstruktúra már induláskor rendben van. Később külön szolgáltatásoldalak és kampányoldalak kapcsolhatók hozzá.' },
+  ],
+  scope: {
+    eyebrow: 'Ami valóban kell',
+    title: 'Nem dobozos csomag. Józan prioritások.',
+    intro: 'A kisvállalkozásod jelenlegi céljához igazítjuk a terjedelmet. Először azt építjük meg, ami a megtalálhatósághoz, a hitelességhez és az ajánlatkéréshez szükséges.',
+    items: [
+      { title: 'Ajánlat és célcsoport tisztázása', text: 'Közösen megfogalmazzuk, mitől releváns a szolgáltatásod annak, aki éppen megoldást keres. Ez lesz a menü, a címsorok és a tartalom alapja.' },
+      { title: 'Mobilra tervezett egyedi felület', text: 'A webdesign a márkádhoz illeszkedik, de nem megy a használhatóság rovására. Minden fontos tartalom és gomb kis kijelzőn is kényelmesen elérhető.' },
+      { title: 'Keresőbarát oldalstruktúra', text: 'Egyedi title és leírás, helyes címsorok, belső linkek, strukturált adatok, sitemap és indexelhető HTML segíti a Google-t az oldal értelmezésében.' },
+      { title: 'Gyors, biztonságos technikai megvalósítás', text: 'A könnyű, statikus technológia csökkenti a felesleges bővítmények és frissítések kockázatát. A képek, betűk és kód teljesítményre optimalizálva kerülnek ki.' },
+    ],
+  },
+  process: [
+    { title: 'Röviden feltérképezzük az üzleti helyzetet', text: 'Átbeszéljük a szolgáltatásokat, a legjobb ügyfeleket, a gyakori kérdéseket, a versenytársakat és azt, milyen megkeresés számít valóban értékesnek.' },
+    { title: 'Elkészül a tartalmi váz és a vizuális irány', text: 'Még fejlesztés előtt láthatóvá válik az oldalak sorrendje, a fő üzenet és a kapcsolatfelvételi út. Így nem utólag próbáljuk megtölteni tartalommal a dizájnt.' },
+    { title: 'Fejlesztünk, tesztelünk és élesítünk', text: 'A weboldalt több képernyőméreten, valódi linkekkel és kapcsolatfelvételi helyzetekkel ellenőrizzük. Az élesítéshez a keresőmotorok számára szükséges technikai elemek is elkészülnek.' },
+  ],
+  faq: [
+    { question: 'Milyen weboldal való egy kisvállalkozásnak?', answer: 'Általában egy fókuszált céges weboldal a legjobb kiindulópont: bemutatja az ajánlatot, a legfontosabb szolgáltatásokat, a bizonyítékokat és a kapcsolatfelvételt. A pontos oldalszámot nem egy csomag, hanem a szolgáltatások és a keresési szándékok határozzák meg.' },
+    { question: 'Egyoldalas vagy többoldalas weboldalt érdemes készíteni?', answer: 'Egyetlen jól felépített oldal elegendő lehet egy egyszerű ajánlathoz. Ha több eltérő szolgáltatásra vagy keresési kifejezésre szeretnél megjelenni, a külön, részletes szolgáltatásoldalak általában tisztábbak a látogatónak és a keresőnek is.' },
+    { question: 'Mennyi idő alatt készül el egy kisvállalkozói weboldal?', answer: 'A terjedelemtől, a szükséges tartalomtól és a visszajelzések gyorsaságától függ. Az első egyeztetés után meghatározzuk a reális ütemezést és azokat az anyagokat, amelyekre a folyamatos haladáshoz szükség van.' },
+    { question: 'Segítetek a weboldal szövegében és a SEO-ban is?', answer: 'Igen. A közös tervezés része az ajánlat, a kulcsfontosságú üzenetek, a címsorok, az oldalstruktúra és a technikai SEO. A tartalomnak egyszerre kell érthetőnek lennie az érdeklődő és feldolgozhatónak a kereső számára.' },
+    { question: 'Később bővíthető lesz az oldal?', answer: 'Igen. Úgy tervezzük meg az alapot, hogy új szolgáltatásoldal, referencia, landing page vagy egyedi funkció később logikusan csatlakozhasson hozzá.' },
+  ],
+  related: [
+    { href: '/weboldal-keszites/', title: 'Céges weboldal készítés', text: 'Részletes áttekintés az üzleti célú weboldal tervezéséről és fejlesztéséről.' },
+    { href: '/weboldal-felujitas-vallalkozasoknak/', title: 'Weboldal felújítás vállalkozásoknak', text: 'Ha már van honlapod, de a tartalom, a mobilos használat vagy a technika elavult.' },
+    { href: '/landing-page-keszites/', title: 'Landing page készítés hirdetéshez', text: 'Egyetlen kampányhoz vagy ajánlathoz tervezett, fókuszált céloldal.' },
+  ],
+  contact: { title: 'Első céges weboldal vagy szintlépés?', text: 'Írd meg röviden, mivel foglalkozol és mit szeretnél elérni. Egy kötetlen egyeztetésen megmutatjuk a reális első lépést.', cta: 'Kérek egy első egyeztetést' },
+};
+
+const structuredData = createServiceStructuredData({
+  name: 'Weboldal készítés kisvállalkozásoknak',
+  description,
+  path: '/weboldal-keszites-kisvallalkozasoknak/',
+  serviceTypes: ['Weboldal készítés kisvállalkozásoknak', 'Kisvállalkozói weboldal készítés', 'Céges weboldal készítés'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <NicheServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</BaseLayout>

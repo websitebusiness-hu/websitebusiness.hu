@@ -17,6 +17,10 @@ const ogImage = new URL('/images/og-image.png', siteUrl);
 const huUrl = new URL('/', siteUrl);
 const enUrl = new URL('/en/', siteUrl);
 const organizationName = 'WebsiteBusiness';
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/';
+const robotsContent = noindex
+  ? 'noindex, follow'
+  : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
 const services =
   lang === 'en'
@@ -43,8 +47,18 @@ const structuredData = {
       url: siteUrl.href,
       logo: new URL('/images/logo.webp', siteUrl).href,
       image: ogImage.href,
+      description: lang === 'en'
+        ? 'Business websites, landing pages and custom web applications for growing companies.'
+        : 'Üzleti célú weboldalak, landing oldalak és egyedi webalkalmazások vállalkozásoknak.',
       email: 'info@websitebusiness.hu',
       telephone: '+36 20 569 4772',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'info@websitebusiness.hu',
+        telephone: '+36 20 569 4772',
+        availableLanguage: ['Hungarian', 'English'],
+      },
       sameAs: [
         'https://www.instagram.com/websitebusinesshu/',
         'https://www.facebook.com/profile.php?id=61566883799064',
@@ -60,25 +74,27 @@ const structuredData = {
         '@id': `${siteUrl}#organization`,
       },
     },
-    {
-      '@type': 'ProfessionalService',
-      '@id': `${siteUrl}#service`,
-      name: organizationName,
-      url: siteUrl.href,
-      image: ogImage.href,
-      description,
-      email: 'info@websitebusiness.hu',
-      telephone: '+36 20 569 4772',
-      areaServed: {
-        '@type': 'Country',
-        name: lang === 'en' ? 'Hungary' : 'Magyarország',
-      },
-      availableLanguage: ['Hungarian', 'English'],
-      serviceType: services,
-      provider: {
-        '@id': `${siteUrl}#organization`,
-      },
-    },
+    ...(isHomePage
+      ? [{
+          '@type': 'ProfessionalService',
+          '@id': `${siteUrl}#service`,
+          name: organizationName,
+          url: siteUrl.href,
+          image: ogImage.href,
+          description,
+          email: 'info@websitebusiness.hu',
+          telephone: '+36 20 569 4772',
+          areaServed: {
+            '@type': 'Country',
+            name: lang === 'en' ? 'Hungary' : 'Magyarország',
+          },
+          availableLanguage: ['Hungarian', 'English'],
+          serviceType: services,
+          provider: {
+            '@id': `${siteUrl}#organization`,
+          },
+        }]
+      : []),
   ],
 };
 ---
@@ -92,11 +108,14 @@ const structuredData = {
     <meta name="theme-color" content="#f7f4ee" />
     <meta name="color-scheme" content="light" />
     <meta name="author" content={organizationName} />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     {
       hasLanguageAlternates && (
         <>
@@ -123,6 +142,8 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:secure_url" content={ogImage.href} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta

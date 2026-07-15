@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import NicheServicePage from '../components/NicheServicePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createServiceStructuredData } from '../lib/seo';
+
+const title = 'Ügyfélportál fejlesztés vállalkozásoknak | WebsiteBusiness';
+const description = 'Egyedi ügyfélportál fejlesztés vállalkozásoknak: biztonságos belépés, dokumentumok, ügyállapotok, üzenetek és önkiszolgáló ügyintézés egy helyen.';
+
+const content = {
+  breadcrumb: 'Ügyfélportál fejlesztés',
+  eyebrow: 'Egyedi online ügyfélfelület',
+  title: 'Ügyfélportál fejlesztés egyszerűbb ügyintézéshez.',
+  intro: 'Biztonságos, saját márkás online felületet építünk, ahol ügyfeleid vagy partnereid belépés után elérhetik a számukra fontos adatokat, dokumentumokat és következő lépéseket.',
+  primaryCta: 'Beszéljük át az ügyfélutat',
+  primarySubject: 'Ügyfélportál fejlesztés – első egyeztetés',
+  proof: 'Ügyfélút-tervezés, prototípus, jogosultságok, integrációk és fokozatos bevezetés egy kézben.',
+  situation: {
+    eyebrow: 'Amikor az e-mail már szűk keresztmetszet',
+    title: 'Az ügyfél nem újabb levelet akar. Biztos választ keres.',
+    text: 'Ha az állapotinformációk, fájlok és kérések több e-mail-szálban élnek, az ügyfél és a csapat is időt veszít. Egy jól tervezett portál nem távolítja el a személyes kapcsolatot: az ismétlődő ügyintézést teszi egyszerűbbé.',
+    signs: [
+      'Az ügyfelek rendszeresen rákérdeznek egy ügy, rendelés vagy projekt aktuális állapotára',
+      'Dokumentumok és jóváhagyások hosszú e-mail-szálakban vesznek el',
+      'A csapat ugyanazokat az információkat kézzel küldi el újra és újra',
+      'Különböző ügyféltípusoknak eltérő adatokat és funkciókat kell megmutatni',
+    ],
+  },
+  outcomes: [
+    { title: 'Önkiszolgáló, mégis személyes ügyfélélmény', text: 'A gyakori műveletek bármikor elérhetők, miközben az ügyfél egyértelműen látja, mikor és hogyan kérhet segítséget. A portál a kapcsolatot támogatja, nem elrejti.' },
+    { title: 'Kevesebb státuszkérdés és fájlkeresés', text: 'A legfrissebb állapot, feladat és dokumentum ugyanazon az adatlapon jelenik meg. A munkatársak ideje a valódi döntésekre és kivételekre marad.' },
+    { title: 'Egységesebb és biztonságosabb adatcsere', text: 'A hozzáférések felhasználóhoz és szerepkörhöz köthetők, a műveletek naplózhatók. Az érzékeny fájlok nem ellenőrizetlen továbbküldésekben keringenek.' },
+  ],
+  scope: {
+    eyebrow: 'Tipikus lehetőségek',
+    title: 'Az ügyfélút köré épített funkciók.',
+    intro: 'Az ügyfélportál nem funkciólista, hanem egy vagy több visszatérő ügyintézési folyamat digitális felülete. A szükséges modulokat a használati helyzet és az adatbiztonsági igény határozza meg.',
+    items: [
+      { title: 'Biztonságos belépés és szerepkörök', text: 'Ügyfél, partner, kapcsolattartó vagy munkatárs eltérő nézetet és jogosultságot kaphat. Szükség esetén többfaktoros hitelesítés és szervezeti hozzáférés is tervezhető.' },
+      { title: 'Ügyek, projektek és állapotok', text: 'Az ügyfél átláthatóan követheti, mi történt, mi következik, és van-e tőle elvárt feladat. A belső admin és a külső nézet ugyanahhoz a folyamathoz kapcsolódhat.' },
+      { title: 'Dokumentumok és jóváhagyások', text: 'Fájlok feltöltése, verziók, letöltések, elfogadások és megjegyzések egy helyre kerülhetnek. Az értesítések a valóban fontos változásokról szólnak.' },
+      { title: 'Fizetés, foglalás vagy külső rendszerkapcsolat', text: 'A jogosan elérhető API-k segítségével fizetési, számlázási, CRM- vagy időpontfoglalási folyamat kapcsolható a portálhoz, egységes ügyfélélménnyel.' },
+    ],
+  },
+  process: [
+    { title: 'Feltérképezzük az ügyfél és a csapat útját', text: 'Összegyűjtjük a visszatérő kérdéseket, dokumentumokat, döntési pontokat és kivételeket. Külön választjuk azt, amit az ügyfél önállóan intézhet, és amit emberi segítséggel érdemes kezelni.' },
+    { title: 'Prototípussal teszteljük a kulcsfolyamatot', text: 'A belépés, kezdőképernyő és legfontosabb ügyintézési út kattintható terven ellenőrizhető. Így a fejlesztés előtt kiderül, hogy a felület valóban érthető-e.' },
+    { title: 'Biztonságosan fejlesztünk és fokozatosan vezetünk be', text: 'Az első verziót kontrollált felhasználói körrel érdemes elindítani. A naplók, visszajelzések és támogatási kérdések alapján finomítjuk, majd bővítjük a hozzáférést.' },
+  ],
+  faq: [
+    { question: 'Mi a különbség az ügyfélportál és egy sima weboldal között?', answer: 'A nyilvános weboldal elsősorban tájékoztat és érdeklődőt szerez. Az ügyfélportál belépéshez kötött, személyre szabott adatokat és műveleteket biztosít meglévő ügyfeleknek vagy partnereknek. A kettő kapcsolódhat egymáshoz, de eltérő biztonsági és működési követelményeik vannak.' },
+    { question: 'Milyen cégeknek hasznos az ügyfélportál?', answer: 'Ott ad jelentős értéket, ahol az ügyfélkapcsolat több lépésből áll, rendszeres az állapotkövetés, sok dokumentum cserél gazdát, vagy az ügyfél ismétlődően adatot ad meg és jóváhagy. B2B szolgáltatók, kivitelezők, tanácsadók és előfizetéses szolgáltatások gyakran ilyenek.' },
+    { question: 'Összeköthető CRM-mel vagy számlázóval?', answer: 'Igen, ha az adott szolgáltatás biztonságos és dokumentált integrációs lehetőséget biztosít. A kapcsolat iránya, frissítési gyakorisága, hibakezelése és az adatkezelési felelősség az integrációs terv része.' },
+    { question: 'Hogyan véditek az ügyféladatokat?', answer: 'A legkisebb szükséges jogosultság elvét, biztonságos hitelesítést, titkosított adatkapcsolatot, naplózást, mentést és kontrollált üzemeltetést tervezünk. A konkrét követelményeket a kezelt adatok, a jogszabályi környezet és az üzleti kockázat alapján kell meghatározni.' },
+    { question: 'Mobilról is használható lesz?', answer: 'Igen. A legfontosabb ügyfélműveleteket mobilra is megtervezzük. Ha a folyamat speciális eszközt vagy nagy adatmennyiséget igényel, külön meghatározzuk, mi legyen teljes értékű mobilon és mi asztali feladatra optimalizált.' },
+  ],
+  related: [
+    { href: '/egyedi-admin-felulet-fejlesztes/', title: 'Egyedi admin felület fejlesztés', text: 'A portál mögötti belső ügyintézés, jogosultságok és operatív folyamatok kezelése.' },
+    { href: '/egyedi-webfejlesztes/', title: 'Egyedi webalkalmazás fejlesztés', text: 'Összetettebb digitális termékek és üzleti rendszerek teljes körű fejlesztése.' },
+    { href: '/weboldal-keszites/', title: 'Céges weboldal készítés', text: 'Nyilvános online jelenlét, amely a megfelelő érdeklődőket az ügyfélút elejére hozza.' },
+  ],
+  contact: { title: 'Az ügyfelek ugyanazokat a kérdéseket teszik fel?', text: 'Írd meg, milyen adatot, dokumentumot vagy státuszt kezeltek ma e-mailben. Megnézzük, melyik folyamat adna jó alapot egy ügyfélportál első verziójához.', cta: 'Kérek egy ügyfélút-felmérést' },
+};
+
+const structuredData = createServiceStructuredData({
+  name: 'Ügyfélportál fejlesztés vállalkozásoknak',
+  description,
+  path: '/ugyfelportal-fejlesztes/',
+  serviceTypes: ['Ügyfélportál fejlesztés', 'Partnerportál fejlesztés', 'Online ügyfélfelület', 'Önkiszolgáló ügyintézés'],
+  faq: content.faq,
+  breadcrumb: content.breadcrumb,
+});
+---
+
+<BaseLayout {title} {description} hasLanguageAlternates={false}>
+  <Header page="service" />
+  <NicheServicePage {content} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</BaseLayout>
